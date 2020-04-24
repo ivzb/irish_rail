@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IrishRail</string>
+    <string name="title_trains">Trains</string>
 </resources>
