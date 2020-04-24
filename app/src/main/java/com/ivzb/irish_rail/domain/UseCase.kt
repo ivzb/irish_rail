@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
  */
 abstract class UseCase<in P, R> {
 
-    protected var taskScheduler: Scheduler = DefaultScheduler
+    private var taskScheduler: Scheduler = DefaultScheduler
 
     /** Executes the use case asynchronously and places the [Result] in a MutableLiveData
      *
@@ -17,7 +17,8 @@ abstract class UseCase<in P, R> {
      *
      */
     operator fun invoke(parameters: P, result: MutableLiveData<Result<R>>) {
-        // result.value = Result.Loading TODO: add data to Loading to avoid glitches
+        result.value = Result.Loading
+
         try {
             taskScheduler.execute {
                 try {

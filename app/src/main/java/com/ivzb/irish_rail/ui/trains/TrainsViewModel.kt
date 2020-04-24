@@ -23,7 +23,7 @@ class TrainsViewModel @Inject constructor(
 
         trains = fetchTrainsResult.map {
             if (it is Result.Loading) {
-                // TODO
+                // TODO: Return actual loading indicator
 //                listOf(LoadingIndicator)
                 listOf()
             } else {

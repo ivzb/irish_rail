@@ -5,8 +5,6 @@ import android.os.Looper
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-private const val NUMBER_OF_THREADS = 4
-
 interface Scheduler {
 
     fun execute(task: () -> Unit)
@@ -47,6 +45,8 @@ object DefaultScheduler : Scheduler {
  * Runs tasks in a [ExecutorService] with a fixed thread of pools
  */
 internal object AsyncScheduler : Scheduler {
+
+    private const val NUMBER_OF_THREADS = 4
 
     private val executorService: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
 

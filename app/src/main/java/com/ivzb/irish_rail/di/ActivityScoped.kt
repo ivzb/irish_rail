@@ -1,8 +1,5 @@
 package com.ivzb.irish_rail.di
 
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 
 /**
@@ -28,7 +25,6 @@ import javax.inject.Scope
  * [@Singleton] is used to specify that the lifespan of a dependency be the same as that of the
  * Application.
  */
-@Documented
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class ActivityScoped
