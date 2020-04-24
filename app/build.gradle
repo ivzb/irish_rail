@@ -60,4 +60,10 @@ dependencies {
     // Instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-simplexml:$retrofitConverterSimpleXmlVersion"
 }

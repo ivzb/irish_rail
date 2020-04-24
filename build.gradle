@@ -10,8 +10,11 @@ buildscript {
         dagger = '2.24'
         lifecycleVersion = '2.2.0'
         activityVersion = '1.0.0-beta01'
-        fragmentVersion = "1.2.4"
+        fragmentVersion = '1.2.4'
         navigationVersion = '2.2.2'
+        okhttpVersion = '4.3.1'
+        retrofitVersion = '2.7.0'
+        retrofitConverterSimpleXmlVersion = '2.8.1'
         junitVersion = '4.12'
         extJunitVersion = '1.1.0'
         espressoVersion = '3.1.1'
