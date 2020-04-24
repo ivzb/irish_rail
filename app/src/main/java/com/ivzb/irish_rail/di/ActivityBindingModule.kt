@@ -1,6 +1,9 @@
 package com.ivzb.irish_rail.di
 
+import com.ivzb.irish_rail.ui.main.MainActivity
+import com.ivzb.irish_rail.ui.main.MainActivityModule
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * We want Dagger.Android to create a Subcomponent which has a parent Component of whichever module
@@ -12,4 +15,13 @@ import dagger.Module
  * When Dagger.Android annotation processor runs it will create 2 subcomponents for us.
  */
 @Module
-abstract class ActivityBindingModule
+abstract class ActivityBindingModule {
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            MainActivityModule::class
+        ]
+    )
+    internal abstract fun mainActivity(): MainActivity
+}
