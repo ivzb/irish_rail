@@ -5,29 +5,29 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ivzb.irish_rail.R
-import com.ivzb.irish_rail.databinding.ItemTrainBinding
+import com.ivzb.irish_rail.databinding.ItemTrainPositionBinding
 import com.ivzb.irish_rail.model.TrainPosition
 import com.ivzb.irish_rail.ui.ItemViewBinder
 
-class TrainViewBinder(
+class TrainPositionsViewBinder(
     private val lifecycleOwner: LifecycleOwner,
     private val trainsViewModel: TrainPositionsViewModel
-) : ItemViewBinder<TrainPosition, TrainViewHolder>(
+) : ItemViewBinder<TrainPosition, TrainPositionViewHolder>(
     TrainPosition::class.java
 ) {
 
-    override fun createViewHolder(parent: ViewGroup): TrainViewHolder =
-        TrainViewHolder(
-            ItemTrainBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+    override fun createViewHolder(parent: ViewGroup): TrainPositionViewHolder =
+        TrainPositionViewHolder(
+            ItemTrainPositionBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             lifecycleOwner,
             trainsViewModel
         )
 
-    override fun bindViewHolder(model: TrainPosition, viewHolder: TrainViewHolder) {
+    override fun bindViewHolder(model: TrainPosition, viewHolder: TrainPositionViewHolder) {
         viewHolder.bind(model)
     }
 
-    override fun getItemType(): Int = R.layout.item_train
+    override fun getItemType(): Int = R.layout.item_train_position
 
     override fun areItemsTheSame(oldItem: TrainPosition, newItem: TrainPosition): Boolean =
         oldItem.code == newItem.code
@@ -36,8 +36,8 @@ class TrainViewBinder(
         oldItem == newItem
 }
 
-class TrainViewHolder(
-    private val binding: ItemTrainBinding,
+class TrainPositionViewHolder(
+    private val binding: ItemTrainPositionBinding,
     private val lifecycleOwner: LifecycleOwner,
     private val trainsViewModel: TrainPositionsViewModel
 ) : ViewHolder(binding.root) {

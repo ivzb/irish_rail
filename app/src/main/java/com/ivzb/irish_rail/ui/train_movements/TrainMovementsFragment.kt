@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.ui.train_positions
+package com.ivzb.irish_rail.ui.train_movements
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.ivzb.irish_rail.databinding.FragmentTrainPositionsBinding
+import com.ivzb.irish_rail.databinding.FragmentTrainMovementsBinding
 import com.ivzb.irish_rail.ui.*
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TrainPositionsFragment : DaggerFragment() {
+class TrainMovementsFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var trainsViewModel: TrainPositionsViewModel
-    private lateinit var binding: FragmentTrainPositionsBinding
+    private lateinit var trainsViewModel: TrainMovementsViewModel
+    private lateinit var binding: FragmentTrainMovementsBinding
 
     private var adapter: ItemAdapter? = null
 
@@ -28,9 +28,9 @@ class TrainPositionsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        trainsViewModel = ViewModelProvider(this, viewModelFactory).get(TrainPositionsViewModel::class.java)
+        trainsViewModel = ViewModelProvider(this, viewModelFactory).get(TrainMovementsViewModel::class.java)
 
-        binding = FragmentTrainPositionsBinding.inflate(inflater, container, false).apply {
+        binding = FragmentTrainMovementsBinding.inflate(inflater, container, false).apply {
             viewModel = trainsViewModel
             lifecycleOwner = viewLifecycleOwner
         }
@@ -39,12 +39,18 @@ class TrainPositionsFragment : DaggerFragment() {
             showTrains(binding.rvTrains, it)
         })
 
+        requireArguments().apply {
+            val trainId = TrainMovementsFragmentArgs.fromBundle(this).trainId
+            binding.trainId = trainId
+            trainsViewModel.fetchTrains(trainId)
+        }
+
         return binding.root
     }
 
     private fun showTrains(recyclerView: RecyclerView, list: List<Any>?) {
         if (adapter == null) {
-            val trainsViewBinder = TrainPositionsViewBinder(this, trainsViewModel)
+            val trainsViewBinder = TrainMovementsViewBinder(this, trainsViewModel)
             val emptyViewBinder = EmptyViewBinder()
 
             val viewBinders = HashMap<ItemClass, ItemBinder>().apply {

@@ -3,13 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_trains">
+    app:startDestination="@id/navigation_train_positions">
 
     <fragment
-        android:id="@+id/navigation_trains"
+        android:id="@+id/navigation_train_positions"
         android:name="com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragment"
         android:label="@string/trains"
         tools:layout="@layout/fragment_train_positions" />
+
+    <fragment
+        android:id="@+id/navigation_train_movements"
+        android:name="com.ivzb.irish_rail.ui.train_movements.TrainMovementsFragment"
+        android:label="@string/trains"
+        tools:layout="@layout/fragment_train_movements">
+
+        <argument
+            android:name="trainId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_stations"
