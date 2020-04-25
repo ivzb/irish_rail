@@ -13,6 +13,7 @@ import com.ivzb.irish_rail.domain.EventObserver
 import com.ivzb.irish_rail.model.ui.train.TrainMovement
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_movements.TrainMovementsFragmentDirections.Companion.toStationDetails
+import com.ivzb.irish_rail.util.capitalizeWords
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -48,11 +49,12 @@ class TrainMovementsFragment : DaggerFragment() {
         })
 
         requireArguments().apply {
-            val (trainId, date, direction) = TrainMovementsFragmentArgs.fromBundle(this)
+            val (trainId, direction) = TrainMovementsFragmentArgs.fromBundle(this)
             binding.trainId = trainId
             trainsViewModel.fetchTrains(trainId)
 
-            requireActivity().title = "Train $trainId $direction"
+            val formattedDirection = direction.toLowerCase().removePrefix("to ").capitalizeWords()
+            requireActivity().title = "Train ${trainId.trim()} to $formattedDirection"
         }
 
         return binding.root

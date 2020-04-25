@@ -44,7 +44,7 @@
                 android:id="@+id/tv_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{ train.locationName }"
+                android:text="@{ train.formattedLocation }"
                 android:textAlignment="viewStart"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"

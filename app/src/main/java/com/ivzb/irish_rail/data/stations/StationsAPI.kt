@@ -11,8 +11,9 @@ interface StationsAPI {
     @GET("/realtime/realtime.asmx/getAllStationsXML")
     fun fetchStations(): Call<StationsResponse>
 
-    @GET("/realtime/realtime.asmx/getStationDataByCodeXML")
+    @GET("/realtime/realtime.asmx/getStationDataByCodeXML_WithNumMins")
     fun fetchStationDetails(
-        @Query("StationCode") stationCode: String
+        @Query("StationCode") stationCode: String,
+        @Query("NumMins") numMins: Int = 90
     ): Call<StationsDetailsResponse>
 }

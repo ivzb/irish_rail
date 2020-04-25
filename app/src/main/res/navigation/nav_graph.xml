@@ -27,10 +27,6 @@
             app:argType="string" />
 
         <argument
-            android:name="date"
-            app:argType="string" />
-
-        <argument
             android:name="direction"
             app:argType="string" />
 

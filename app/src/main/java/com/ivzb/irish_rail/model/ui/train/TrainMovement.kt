@@ -12,4 +12,7 @@ data class TrainMovement(
     val scheduledDeparture: String,
     val expectedArrival: String,
     val expectedDeparture: String
-)
+) {
+
+    fun getFormattedLocation() = if (locationName == "") locationCode else locationName
+}

@@ -85,7 +85,6 @@ class TrainPositionsFragment : DaggerFragment() {
         findNavController().navigate(
             toTrainMovements(
                 trainPosition.code,
-                trainPosition.date,
                 trainPosition.direction
             )
         )
