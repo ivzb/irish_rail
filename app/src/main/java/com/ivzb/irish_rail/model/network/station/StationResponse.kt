@@ -1,9 +1,9 @@
-package com.ivzb.irish_rail.model
+package com.ivzb.irish_rail.model.network.station
 
+import com.ivzb.irish_rail.model.ui.station.Station
 import com.ivzb.irish_rail.util.capitalizeWords
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
-import java.util.*
 
 @Root(name = "objStation", strict = false)
 data class StationResponse(

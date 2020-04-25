@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.ItemTrainMovementBinding
-import com.ivzb.irish_rail.model.TrainMovement
+import com.ivzb.irish_rail.model.ui.train.TrainMovement
 import com.ivzb.irish_rail.ui.ItemViewBinder
 
 class TrainMovementsViewBinder(

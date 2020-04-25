@@ -1,7 +1,7 @@
 package com.ivzb.irish_rail.data.stations
 
-import com.ivzb.irish_rail.model.Station
-import com.ivzb.irish_rail.model.StationDetails
+import com.ivzb.irish_rail.model.ui.station.Station
+import com.ivzb.irish_rail.model.ui.station.StationDetails
 
 interface StationsDataSource {
 

@@ -1,7 +1,7 @@
 package com.ivzb.irish_rail.data.trains
 
-import com.ivzb.irish_rail.model.TrainMovement
-import com.ivzb.irish_rail.model.TrainPosition
+import com.ivzb.irish_rail.model.ui.train.TrainMovement
+import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.util.NetworkUtils
 import retrofit2.Retrofit
 import javax.inject.Inject

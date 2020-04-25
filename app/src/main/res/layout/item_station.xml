@@ -6,7 +6,7 @@
 
         <variable
             name="station"
-            type="com.ivzb.irish_rail.model.Station" />
+            type="com.ivzb.irish_rail.model.ui.station.Station" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.model
+package com.ivzb.irish_rail.model.network.station
 
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root

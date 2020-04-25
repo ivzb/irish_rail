@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.ItemStationDetailsBinding
-import com.ivzb.irish_rail.model.StationDetails
+import com.ivzb.irish_rail.model.ui.station.StationDetails
 import com.ivzb.irish_rail.ui.ItemViewBinder
 
 class StationDetailsViewBinder(

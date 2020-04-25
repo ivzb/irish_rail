@@ -7,7 +7,7 @@ import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
 import com.ivzb.irish_rail.domain.stations.FetchStationDetailsUseCase
 import com.ivzb.irish_rail.domain.successOr
-import com.ivzb.irish_rail.model.StationDetails
+import com.ivzb.irish_rail.model.ui.station.StationDetails
 import com.ivzb.irish_rail.ui.Empty
 import com.ivzb.irish_rail.util.map
 import javax.inject.Inject

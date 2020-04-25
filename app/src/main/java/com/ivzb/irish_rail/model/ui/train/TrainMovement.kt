@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.model
+package com.ivzb.irish_rail.model.ui.train
 
 data class TrainMovement(
     val code: String,

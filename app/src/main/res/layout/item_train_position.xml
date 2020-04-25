@@ -7,7 +7,7 @@
 
         <variable
             name="train"
-            type="com.ivzb.irish_rail.model.TrainPosition" />
+            type="com.ivzb.irish_rail.model.ui.train.TrainPosition" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentTrainPositionsBinding
 import com.ivzb.irish_rail.domain.EventObserver
-import com.ivzb.irish_rail.model.TrainPosition
+import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragmentDirections.Companion.toTrainMovements
 import dagger.android.support.DaggerFragment

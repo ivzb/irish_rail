@@ -1,7 +1,7 @@
 package com.ivzb.irish_rail.data.stations
 
-import com.ivzb.irish_rail.model.StationsDetailsResponse
-import com.ivzb.irish_rail.model.StationsResponse
+import com.ivzb.irish_rail.model.network.station.StationsDetailsResponse
+import com.ivzb.irish_rail.model.network.station.StationsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

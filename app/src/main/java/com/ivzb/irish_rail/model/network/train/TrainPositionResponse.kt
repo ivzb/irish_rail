@@ -1,5 +1,7 @@
-package com.ivzb.irish_rail.model
+package com.ivzb.irish_rail.model.network.train
 
+import com.ivzb.irish_rail.model.ui.train.TrainPosition
+import com.ivzb.irish_rail.model.ui.train.TrainStatus
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
@@ -25,10 +27,4 @@ data class TrainPositionResponse(
         message = this.publicMessage.replace("\\n", "\n"),
         direction = this.direction
     )
-}
-
-enum class TrainStatus(val value: String?) {
-    NotRunningYet("Not running yet"),
-    Running("Running"),
-    Unknown("Unknown")
 }

@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.model
+package com.ivzb.irish_rail.model.ui.station
 
 data class StationDetails(
     val trainCode: String,

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentStationsBinding
 import com.ivzb.irish_rail.domain.EventObserver
-import com.ivzb.irish_rail.model.Station
+import com.ivzb.irish_rail.model.ui.station.Station
 import com.ivzb.irish_rail.ui.EmptyViewBinder
 import com.ivzb.irish_rail.ui.ItemAdapter
 import com.ivzb.irish_rail.ui.ItemBinder

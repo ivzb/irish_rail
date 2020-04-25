@@ -2,7 +2,7 @@ package com.ivzb.irish_rail.domain.stations
 
 import com.ivzb.irish_rail.data.stations.StationsRepository
 import com.ivzb.irish_rail.domain.UseCase
-import com.ivzb.irish_rail.model.StationDetails
+import com.ivzb.irish_rail.model.ui.station.StationDetails
 import javax.inject.Inject
 
 open class FetchStationDetailsUseCase @Inject constructor(

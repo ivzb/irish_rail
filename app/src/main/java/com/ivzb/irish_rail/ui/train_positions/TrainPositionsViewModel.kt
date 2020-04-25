@@ -7,7 +7,7 @@ import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
 import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.domain.trains.FetchTrainPositionsUseCase
-import com.ivzb.irish_rail.model.TrainPosition
+import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.ui.Empty
 import com.ivzb.irish_rail.util.map
 import javax.inject.Inject

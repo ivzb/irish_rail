@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.databinding.FragmentTrainMovementsBinding
 import com.ivzb.irish_rail.domain.EventObserver
-import com.ivzb.irish_rail.model.TrainMovement
+import com.ivzb.irish_rail.model.ui.train.TrainMovement
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_movements.TrainMovementsFragmentDirections.Companion.toStationDetails
 import dagger.android.support.DaggerFragment
