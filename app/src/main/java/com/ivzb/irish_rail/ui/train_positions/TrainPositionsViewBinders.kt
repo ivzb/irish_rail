@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.ui.trains
+package com.ivzb.irish_rail.ui.train_positions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.ivzb.irish_rail.ui.ItemViewBinder
 
 class TrainViewBinder(
     private val lifecycleOwner: LifecycleOwner,
-    private val trainsViewModel: TrainsViewModel
+    private val trainsViewModel: TrainPositionsViewModel
 ) : ItemViewBinder<TrainPosition, TrainViewHolder>(
     TrainPosition::class.java
 ) {
@@ -39,7 +39,7 @@ class TrainViewBinder(
 class TrainViewHolder(
     private val binding: ItemTrainBinding,
     private val lifecycleOwner: LifecycleOwner,
-    private val trainsViewModel: TrainsViewModel
+    private val trainsViewModel: TrainPositionsViewModel
 ) : ViewHolder(binding.root) {
 
     fun bind(train: TrainPosition) {

@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.ui.trains
+package com.ivzb.irish_rail.ui.train_positions
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.ivzb.irish_rail.ui.Empty
 import com.ivzb.irish_rail.util.map
 import javax.inject.Inject
 
-class TrainsViewModel @Inject constructor(
+class TrainPositionsViewModel @Inject constructor(
     private val fetchTrainPositionsUseCase: FetchTrainPositionsUseCase
 ) : ViewModel() {
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.ivzb.irish_rail.ui.trains.TrainsViewModel" />
+            type="com.ivzb.irish_rail.ui.train_positions.TrainPositionsViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

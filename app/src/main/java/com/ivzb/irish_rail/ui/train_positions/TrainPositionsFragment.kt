@@ -1,4 +1,4 @@
-package com.ivzb.irish_rail.ui.trains
+package com.ivzb.irish_rail.ui.train_positions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.ivzb.irish_rail.databinding.FragmentTrainsBinding
+import com.ivzb.irish_rail.databinding.FragmentTrainPositionsBinding
 import com.ivzb.irish_rail.ui.*
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TrainsFragment : DaggerFragment() {
+class TrainPositionsFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var trainsViewModel: TrainsViewModel
-    private lateinit var binding: FragmentTrainsBinding
+    private lateinit var trainsViewModel: TrainPositionsViewModel
+    private lateinit var binding: FragmentTrainPositionsBinding
 
     private var adapter: ItemAdapter? = null
 
@@ -28,9 +28,9 @@ class TrainsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        trainsViewModel = ViewModelProvider(this, viewModelFactory).get(TrainsViewModel::class.java)
+        trainsViewModel = ViewModelProvider(this, viewModelFactory).get(TrainPositionsViewModel::class.java)
 
-        binding = FragmentTrainsBinding.inflate(inflater, container, false).apply {
+        binding = FragmentTrainPositionsBinding.inflate(inflater, container, false).apply {
             viewModel = trainsViewModel
             lifecycleOwner = viewLifecycleOwner
         }
