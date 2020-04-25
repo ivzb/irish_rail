@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="train"
-            type="com.ivzb.irish_rail.model.TrainPosition" />
+            name="stationDetails"
+            type="com.ivzb.irish_rail.model.StationDetails" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_train"
+        android:id="@+id/cv_station_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin"
@@ -25,52 +25,77 @@
             android:padding="@dimen/item_padding">
 
             <TextView
-                android:id="@+id/tv_message"
+                android:id="@+id/tv_origin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{ train.message }"
+                android:text="@{ stationDetails.originName + ` (` + stationDetails.originTime + `)` }"
+                android:textAlignment="viewStart"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@+id/tv_current"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Dublin Heuston (20:15)" />
+
+            <TextView
+                android:id="@+id/tv_current"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ stationDetails.stationName + ` (` +  stationDetails.expectedDeparture + `)` }"
+                android:textAlignment="viewStart"
+                android:textAppearance="?textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_destination"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_origin"
+                tools:text="Adamstown (20:31)" />
+
+            <TextView
+                android:id="@+id/tv_destination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ stationDetails.destinationName + ` (` + stationDetails.destinationTime + `)` }"
                 android:textAlignment="viewStart"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current"
+                tools:text="Kildare (20:59)" />
+
+            <TextView
+                android:id="@+id/tv_train_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ stationDetails.trainCode }"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@+id/tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="D284\nCork to Midleton\nExpected departure 16:15" />
+                tools:text="B484" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{ train.date }"
-                android:textAlignment="viewEnd"
-                android:textAppearance="?textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@+id/tv_status"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="25 Apr 2020" />
-
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@{ train.status.value }"
+                android:text="@{ stationDetails.date }"
                 android:textAlignment="viewEnd"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-                app:layout_constraintTop_toTopOf="@+id/tv_date"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="Running" />
+                app:layout_constraintTop_toTopOf="@+id/tv_train_code"
+                tools:text="25 Apr 2020" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

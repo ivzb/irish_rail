@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentStationsBinding
+import com.ivzb.irish_rail.domain.EventObserver
+import com.ivzb.irish_rail.model.Station
 import com.ivzb.irish_rail.ui.EmptyViewBinder
 import com.ivzb.irish_rail.ui.ItemAdapter
 import com.ivzb.irish_rail.ui.ItemBinder
 import com.ivzb.irish_rail.ui.ItemClass
+import com.ivzb.irish_rail.ui.stations.StationsFragmentDirections.Companion.toStationDetails
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -32,7 +36,8 @@ class StationsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        stationsViewModel = ViewModelProvider(this, viewModelFactory).get(StationsViewModel::class.java)
+        stationsViewModel =
+            ViewModelProvider(this, viewModelFactory).get(StationsViewModel::class.java)
 
         binding = FragmentStationsBinding.inflate(inflater, container, false).apply {
             viewModel = stationsViewModel
@@ -41,6 +46,10 @@ class StationsFragment : DaggerFragment() {
 
         stationsViewModel.stations.observe(viewLifecycleOwner, Observer {
             showStations(binding.rvStations, it)
+        })
+
+        stationsViewModel.stationClick.observe(viewLifecycleOwner, EventObserver { station ->
+            navigateToStationDetails(station)
         })
 
         requireActivity().title = getString(R.string.title_stations)
@@ -74,4 +83,12 @@ class StationsFragment : DaggerFragment() {
 
         (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
+
+    private fun navigateToStationDetails(station: Station) =
+        findNavController().navigate(
+            toStationDetails(
+                station.code,
+                station.name
+            )
+        )
 }

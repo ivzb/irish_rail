@@ -39,5 +39,25 @@
         android:id="@+id/navigation_stations"
         android:name="com.ivzb.irish_rail.ui.stations.StationsFragment"
         android:label="@string/stations"
-        tools:layout="@layout/fragment_stations" />
+        tools:layout="@layout/fragment_stations">
+
+        <action
+            android:id="@+id/to_station_details"
+            app:destination="@id/navigation_station_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_station_details"
+        android:name="com.ivzb.irish_rail.ui.station_details.StationDetailsFragment"
+        android:label="@string/station_details"
+        tools:layout="@layout/fragment_station_details">
+
+        <argument
+            android:name="stationCode"
+            app:argType="string" />
+
+        <argument
+            android:name="stationName"
+            app:argType="string" />
+    </fragment>
 </navigation>

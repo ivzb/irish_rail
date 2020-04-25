@@ -3,6 +3,7 @@ package com.ivzb.irish_rail.ui.stations
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
 import com.ivzb.irish_rail.domain.stations.FetchStationsUseCase
 import com.ivzb.irish_rail.domain.successOr
@@ -19,6 +20,8 @@ class StationsViewModel @Inject constructor(
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
+    val stationClick: MutableLiveData<Event<Station>> = MutableLiveData()
+
     private val fetchStationsResult = MutableLiveData<Result<List<Station>?>>()
 
     init {
@@ -32,7 +35,7 @@ class StationsViewModel @Inject constructor(
     }
 
     fun click(station: Station) {
-
+        stationClick.postValue(Event(station))
     }
 
     fun fetchStations() {

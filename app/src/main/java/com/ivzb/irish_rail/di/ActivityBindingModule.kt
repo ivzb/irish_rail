@@ -2,6 +2,7 @@ package com.ivzb.irish_rail.di
 
 import com.ivzb.irish_rail.ui.main.MainActivity
 import com.ivzb.irish_rail.ui.main.MainModule
+import com.ivzb.irish_rail.ui.station_details.StationDetailsModule
 import com.ivzb.irish_rail.ui.stations.StationsModule
 import com.ivzb.irish_rail.ui.train_movements.TrainMovementsModule
 import com.ivzb.irish_rail.ui.train_positions.TrainPositionsModule
@@ -26,7 +27,8 @@ abstract class ActivityBindingModule {
             MainModule::class,
             TrainPositionsModule::class,
             TrainMovementsModule::class,
-            StationsModule::class
+            StationsModule::class,
+            StationDetailsModule::class
         ]
     )
     internal abstract fun mainActivity(): MainActivity

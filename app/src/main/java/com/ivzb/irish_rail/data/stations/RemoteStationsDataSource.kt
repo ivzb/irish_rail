@@ -24,6 +24,7 @@ class RemoteStationsDataSource @Inject constructor(
         return response.body()
             ?.stations
             ?.map { it.asStation() }
+            ?.distinctBy { it.name }
             ?.sortedBy { it.name }
     }
 

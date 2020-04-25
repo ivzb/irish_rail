@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -91,7 +89,4 @@ class TrainPositionsFragment : DaggerFragment() {
                 trainPosition.direction
             )
         )
-
-    private fun showError(@StringRes messageResId: Int) =
-        Toast.makeText(requireContext(), messageResId, Toast.LENGTH_LONG).show()
 }
