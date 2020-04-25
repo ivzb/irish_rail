@@ -52,7 +52,7 @@ class TrainMovementsFragment : DaggerFragment() {
             binding.trainId = trainId
             trainsViewModel.fetchTrains(trainId)
 
-            requireActivity().title = "$trainId - $date - $direction"
+            requireActivity().title = "Train $trainId $direction"
         }
 
         return binding.root

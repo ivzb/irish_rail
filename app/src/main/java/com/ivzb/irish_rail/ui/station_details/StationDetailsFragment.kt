@@ -55,7 +55,7 @@ class StationDetailsFragment : DaggerFragment() {
             binding.stationCode = stationCode
             stationDetailsViewModel.fetchStationDetails(stationCode)
 
-            requireActivity().title = "$stationName ($stationCode)"
+            requireActivity().title = "Station $stationName ($stationCode)"
         }
 
         return binding.root
