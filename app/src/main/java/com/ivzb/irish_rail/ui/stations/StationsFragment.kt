@@ -8,6 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.databinding.FragmentStationsBinding
+import com.ivzb.irish_rail.ui.EmptyViewBinder
+import com.ivzb.irish_rail.ui.ItemAdapter
+import com.ivzb.irish_rail.ui.ItemBinder
+import com.ivzb.irish_rail.ui.ItemClass
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -19,7 +23,7 @@ class StationsFragment : DaggerFragment() {
     private lateinit var stationsViewModel: StationsViewModel
     private lateinit var binding: FragmentStationsBinding
 
-    private var adapter: StationsAdapter? = null
+    private var adapter: ItemAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,27 +48,27 @@ class StationsFragment : DaggerFragment() {
     private fun showStations(recyclerView: RecyclerView, list: List<Any>?) {
         if (adapter == null) {
             val stationsViewBinder = StationViewBinder(this, stationsViewModel)
-            val emptyStationViewBinder = EmptyStationViewBinder()
+            val emptyViewBinder = EmptyViewBinder()
 
-            val viewBinders = HashMap<StationItemClass, StationItemBinder>().apply {
+            val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
                 put(
                     stationsViewBinder.modelClass,
-                    stationsViewBinder as StationItemBinder
+                    stationsViewBinder as ItemBinder
                 )
 
                 put(
-                    emptyStationViewBinder.modelClass,
-                    emptyStationViewBinder as StationItemBinder
+                    emptyViewBinder.modelClass,
+                    emptyViewBinder as ItemBinder
                 )
             }
 
-            adapter = StationsAdapter(viewBinders)
+            adapter = ItemAdapter(viewBinders)
         }
 
         if (recyclerView.adapter == null) {
             recyclerView.adapter = adapter
         }
 
-        (recyclerView.adapter as StationsAdapter).submitList(list ?: emptyList())
+        (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.databinding.FragmentTrainsBinding
+import com.ivzb.irish_rail.ui.*
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class TrainsFragment : DaggerFragment() {
     private lateinit var trainsViewModel: TrainsViewModel
     private lateinit var binding: FragmentTrainsBinding
 
-    private var adapter: TrainsAdapter? = null
+    private var adapter: ItemAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,27 +45,27 @@ class TrainsFragment : DaggerFragment() {
     private fun showTrains(recyclerView: RecyclerView, list: List<Any>?) {
         if (adapter == null) {
             val trainsViewBinder = TrainViewBinder(this, trainsViewModel)
-            val emptyTrainViewBinder = EmptyTrainViewBinder()
+            val emptyViewBinder = EmptyViewBinder()
 
-            val viewBinders = HashMap<TrainItemClass, TrainItemBinder>().apply {
+            val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
                 put(
                     trainsViewBinder.modelClass,
-                    trainsViewBinder as TrainItemBinder
+                    trainsViewBinder as ItemBinder
                 )
 
                 put(
-                    emptyTrainViewBinder.modelClass,
-                    emptyTrainViewBinder as TrainItemBinder
+                    emptyViewBinder.modelClass,
+                    emptyViewBinder as ItemBinder
                 )
             }
 
-            adapter = TrainsAdapter(viewBinders)
+            adapter = ItemAdapter(viewBinders)
         }
 
         if (recyclerView.adapter == null) {
             recyclerView.adapter = adapter
         }
 
-        (recyclerView.adapter as TrainsAdapter).submitList(list ?: emptyList())
+        (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
 }

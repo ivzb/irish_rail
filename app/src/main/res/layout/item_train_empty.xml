@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tv_train_empty"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/empty_padding"
-    android:text="@string/trains_are_not_available"
-    android:gravity="center_horizontal"
-    android:textAppearance="?android:textAppearanceMedium" />

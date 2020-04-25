@@ -1,18 +1,18 @@
 package com.ivzb.irish_rail.ui.stations
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.ItemStationBinding
 import com.ivzb.irish_rail.model.Station
+import com.ivzb.irish_rail.ui.ItemViewBinder
 
 class StationViewBinder(
     private val lifecycleOwner: LifecycleOwner,
     private val stationsViewModel: StationsViewModel
-) : StationItemViewBinder<Station, StationViewHolder>(
+) : ItemViewBinder<Station, StationViewHolder>(
     Station::class.java
 ) {
 
@@ -32,7 +32,7 @@ class StationViewBinder(
     override fun areItemsTheSame(oldItem: Station, newItem: Station): Boolean =
         oldItem.code == newItem.code
 
-    override fun areContentsTheSame(oldItem: Station, newItem: Station) =
+    override fun areContentsTheSame(oldItem: Station, newItem: Station): Boolean =
         oldItem == newItem
 }
 
@@ -51,28 +51,4 @@ class StationViewHolder(
             stationsViewModel.click(station)
         }
     }
-}
-
-// Shown if there are no stations or fetching stations fails
-object StationEmpty
-
-class EmptyViewHolder(itemView: View) : ViewHolder(itemView)
-
-class EmptyStationViewBinder : StationItemViewBinder<StationEmpty, EmptyViewHolder>(
-    StationEmpty::class.java
-) {
-
-    override fun createViewHolder(parent: ViewGroup): ViewHolder {
-        return EmptyViewHolder(
-            LayoutInflater.from(parent.context).inflate(getItemType(), parent, false)
-        )
-    }
-
-    override fun bindViewHolder(model: StationEmpty, viewHolder: EmptyViewHolder) {}
-
-    override fun getItemType() = R.layout.item_station_empty
-
-    override fun areItemsTheSame(oldItem: StationEmpty, newItem: StationEmpty) = true
-
-    override fun areContentsTheSame(oldItem: StationEmpty, newItem: StationEmpty) = true
 }

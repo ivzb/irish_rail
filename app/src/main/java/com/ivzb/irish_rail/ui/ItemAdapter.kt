@@ -1,21 +1,24 @@
-package com.ivzb.irish_rail.ui.trains
+package com.ivzb.irish_rail.ui
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ivzb.irish_rail.R
 
-typealias TrainItemClass = Class<out Any>
+typealias ItemClass = Class<out Any>
 
-typealias TrainItemBinder = TrainItemViewBinder<Any, RecyclerView.ViewHolder>
+typealias ItemBinder = ItemViewBinder<Any, RecyclerView.ViewHolder>
 
-class TrainsAdapter(
-    private val viewBinders: Map<TrainItemClass, TrainItemBinder>
-) : ListAdapter<Any, RecyclerView.ViewHolder>(TrainsDiffCallback(viewBinders)) {
+class ItemAdapter(
+    private val viewBinders: Map<ItemClass, ItemBinder>
+) : ListAdapter<Any, RecyclerView.ViewHolder>(ItemDiffCallback(viewBinders)) {
 
     private val viewTypeToBinders = viewBinders.mapKeys { it.value.getItemType() }
 
-    private fun getViewBinder(viewType: Int): TrainItemBinder =
+    private fun getViewBinder(viewType: Int): ItemBinder =
         viewTypeToBinders.getValue(viewType)
 
     override fun getItemViewType(position: Int): Int =
@@ -38,8 +41,8 @@ class TrainsAdapter(
     }
 }
 
-/** Encapsulates logic to create and bind a ViewHolder for a type of item in the Trains. */
-abstract class TrainItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
+/** Encapsulates logic to create and bind a ViewHolder for a type of item. */
+abstract class ItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
     val modelClass: Class<out M>
 ) : DiffUtil.ItemCallback<M>() {
 
@@ -53,8 +56,8 @@ abstract class TrainItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
     open fun onViewDetachedFromWindow(viewHolder: VH) = Unit
 }
 
-internal class TrainsDiffCallback(
-    private val viewBinders: Map<TrainItemClass, TrainItemBinder>
+internal class ItemDiffCallback(
+    private val viewBinders: Map<ItemClass, ItemBinder>
 ) : DiffUtil.ItemCallback<Any>() {
 
     override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
@@ -69,4 +72,28 @@ internal class TrainsDiffCallback(
         // We know the items are the same class because [areItemsTheSame] returned true
         return viewBinders[oldItem::class.java]?.areContentsTheSame(oldItem, newItem) ?: false
     }
+}
+
+// Shown if there are no items or fetching items fails
+object Empty
+
+class EmptyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+class EmptyViewBinder : ItemViewBinder<Empty, EmptyViewHolder>(
+    Empty::class.java
+) {
+
+    override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return EmptyViewHolder(
+            LayoutInflater.from(parent.context).inflate(getItemType(), parent, false)
+        )
+    }
+
+    override fun bindViewHolder(model: Empty, viewHolder: EmptyViewHolder) {}
+
+    override fun getItemType() = R.layout.item_empty
+
+    override fun areItemsTheSame(oldItem: Empty, newItem: Empty) = true
+
+    override fun areContentsTheSame(oldItem: Empty, newItem: Empty) = true
 }
