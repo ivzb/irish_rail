@@ -4,5 +4,5 @@ import com.ivzb.irish_rail.model.Train
 
 interface TrainsDataSource {
 
-    fun fetchTrains(): List<Train>
+    fun fetchTrains(): List<Train>?
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="trains_padding">16dp</dimen>
-    <dimen name="train_item_margin">8dp</dimen>
-    <dimen name="train_item_min_height">80dp</dimen>
-    <dimen name="train_empty_padding">16dp</dimen>
+    <dimen name="item_padding">16dp</dimen>
+    <dimen name="item_margin">8dp</dimen>
+    <dimen name="item_min_height">80dp</dimen>
+    <dimen name="empty_padding">16dp</dimen>
 </resources>

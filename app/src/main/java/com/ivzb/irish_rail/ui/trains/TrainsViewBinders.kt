@@ -30,7 +30,7 @@ class TrainViewBinder(
     override fun getTrainItemType(): Int = R.layout.item_train
 
     override fun areItemsTheSame(oldItem: Train, newItem: Train): Boolean =
-        oldItem.id == newItem.id
+        oldItem.code == newItem.code
 
     override fun areContentsTheSame(oldItem: Train, newItem: Train) =
         oldItem == newItem

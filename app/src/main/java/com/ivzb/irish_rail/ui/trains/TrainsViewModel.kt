@@ -18,13 +18,13 @@ class TrainsViewModel @Inject constructor(
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
-    private val fetchTrainsResult = MutableLiveData<Result<List<Train>>>()
+    private val fetchTrainsResult = MutableLiveData<Result<List<Train>?>>()
 
     init {
         trains = fetchTrainsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it.successOr(emptyList())
+            it?.successOr(listOf(TrainEmpty)) ?: listOf(TrainEmpty)
         }
 
         fetchTrains()

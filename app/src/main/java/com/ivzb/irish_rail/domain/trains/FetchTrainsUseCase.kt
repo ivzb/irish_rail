@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 open class FetchTrainsUseCase @Inject constructor(
     private val repository: TrainsRepository
-) : UseCase<Unit, List<Train>>() {
+) : UseCase<Unit, List<Train>?>() {
 
-    override fun execute(parameters: Unit): List<Train> = repository.fetchTrains()
+    override fun execute(parameters: Unit): List<Train>? = repository.fetchTrains()
 }

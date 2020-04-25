@@ -13,13 +13,13 @@ class RemoteTrainsDataSource @Inject constructor(
     private val retrofit: Retrofit
 ) : TrainsDataSource {
 
-    override fun fetchTrains(): List<Train> {
+    override fun fetchTrains(): List<Train>? {
         if (!networkUtils.hasNetworkConnection()) {
-            return listOf()
+            return null
         }
 
         val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrains().execute()
 
-        return response.body()?.trains ?: listOf()
+        return response.body()?.trains
     }
 }

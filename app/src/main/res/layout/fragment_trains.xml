@@ -26,17 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingTop="@dimen/trains_padding"
-                android:paddingBottom="@dimen/trains_padding"
+                android:paddingTop="@dimen/item_padding"
+                android:paddingBottom="@dimen/item_padding"
                 android:scrollbars="vertical"
-                app:goneUnless="@{!viewModel.trains.isEmpty}"
                 app:layoutManager="LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </FrameLayout>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

@@ -1,5 +1,8 @@
 package com.ivzb.irish_rail.di
 
+import com.ivzb.irish_rail.data.stations.RemoteStationsDataSource
+import com.ivzb.irish_rail.data.stations.StationsDataSource
+import com.ivzb.irish_rail.data.stations.StationsRepository
 import com.ivzb.irish_rail.data.trains.RemoteTrainsDataSource
 import com.ivzb.irish_rail.data.trains.TrainsDataSource
 import com.ivzb.irish_rail.data.trains.TrainsRepository
@@ -27,6 +30,19 @@ class DataModule {
     fun provideTrainsRepository(
         trainsDataSource: TrainsDataSource
     ): TrainsRepository = TrainsRepository(trainsDataSource)
+
+    @Singleton
+    @Provides
+    fun provideStationsRemoteDataSource(
+        networkUtils: NetworkUtils,
+        retrofit: Retrofit
+    ): StationsDataSource = RemoteStationsDataSource(networkUtils, retrofit)
+
+    @Singleton
+    @Provides
+    fun provideStationsRepository(
+        stationsDataSource: StationsDataSource
+    ): StationsRepository = StationsRepository(stationsDataSource)
 
     @Singleton
     @Provides

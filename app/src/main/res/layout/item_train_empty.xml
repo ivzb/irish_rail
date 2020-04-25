@@ -3,7 +3,7 @@
     android:id="@+id/tv_train_empty"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/train_empty_padding"
+    android:padding="@dimen/empty_padding"
     android:text="@string/trains_not_available"
     android:gravity="center_horizontal"
     android:textAppearance="?android:textAppearanceMedium" />
