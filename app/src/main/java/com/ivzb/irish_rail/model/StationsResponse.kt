@@ -1,6 +1,5 @@
-package com.ivzb.irish_rail.data.stations
+package com.ivzb.irish_rail.model
 
-import com.ivzb.irish_rail.model.StationResponse
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 

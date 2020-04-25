@@ -15,21 +15,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin"
         android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="0dp"
-        app:rippleColor="@color/ripple_material_light">
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/item_min_height">
+            android:minHeight="@dimen/item_min_height"
+            android:padding="@dimen/item_padding">
 
             <TextView
-                android:id="@+id/tv_station"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/item_padding"
-                android:text="@{ station.toString() }"
+                android:text="@{ station.name }"
                 android:textAlignment="viewStart"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"

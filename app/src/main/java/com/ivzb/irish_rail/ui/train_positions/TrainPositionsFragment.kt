@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentTrainPositionsBinding
 import com.ivzb.irish_rail.domain.EventObserver
+import com.ivzb.irish_rail.model.TrainPosition
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragmentDirections.Companion.toTrainMovements
 import dagger.android.support.DaggerFragment
@@ -47,10 +48,10 @@ class TrainPositionsFragment : DaggerFragment() {
         })
 
         trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver { trainPosition ->
-            trainPosition.code?.apply {
-                navigateToTrainMovements(this)
-            } ?: showError(R.string.invalid_train_position)
+            navigateToTrainMovements(trainPosition)
         })
+
+        requireActivity().title = getString(R.string.title_trains)
 
         return binding.root
     }
@@ -82,8 +83,14 @@ class TrainPositionsFragment : DaggerFragment() {
         (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
 
-    private fun navigateToTrainMovements(trainCode: String) =
-        findNavController().navigate(toTrainMovements(trainCode))
+    private fun navigateToTrainMovements(trainPosition: TrainPosition) =
+        findNavController().navigate(
+            toTrainMovements(
+                trainPosition.code,
+                trainPosition.date,
+                trainPosition.direction
+            )
+        )
 
     private fun showError(@StringRes messageResId: Int) =
         Toast.makeText(requireContext(), messageResId, Toast.LENGTH_LONG).show()

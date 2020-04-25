@@ -40,9 +40,11 @@ class TrainMovementsFragment : DaggerFragment() {
         })
 
         requireArguments().apply {
-            val trainId = TrainMovementsFragmentArgs.fromBundle(this).trainId
+            val (trainId, date, direction) = TrainMovementsFragmentArgs.fromBundle(this)
             binding.trainId = trainId
             trainsViewModel.fetchTrains(trainId)
+
+            requireActivity().title = "$trainId - $date - $direction"
         }
 
         return binding.root

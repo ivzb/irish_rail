@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentStationsBinding
 import com.ivzb.irish_rail.ui.EmptyViewBinder
 import com.ivzb.irish_rail.ui.ItemAdapter
@@ -41,6 +42,8 @@ class StationsFragment : DaggerFragment() {
         stationsViewModel.stations.observe(viewLifecycleOwner, Observer {
             showStations(binding.rvStations, it)
         })
+
+        requireActivity().title = getString(R.string.title_stations)
 
         return binding.root
     }

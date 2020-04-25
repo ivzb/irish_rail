@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Irish Rail</string>
+    <string name="title_trains">Irish Rail Trains</string>
+    <string name="title_stations">Irish Rail Stations</string>
     <string name="trains">Trains</string>
     <string name="stations">Stations</string>
     <string name="data_not_available">Data not available right now.</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,27 +16,68 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin"
         android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="0dp"
-        app:rippleColor="@color/ripple_material_light">
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/item_min_height">
+            android:minHeight="@dimen/item_min_height"
+            android:padding="@dimen/item_padding">
 
             <TextView
-                android:id="@+id/tv_train"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_message"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/item_padding"
-                android:text="@{ train.toString() }"
+                android:text="@{ train.message }"
                 android:textAlignment="viewStart"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="D284\nCork to Midleton\nExpected departure 16:15" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ train.date }"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="25 Apr 2020" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ train.status.value }"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Running" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,27 +16,75 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin"
         android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="0dp"
-        app:rippleColor="@color/ripple_material_light">
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/item_min_height">
+            android:minHeight="@dimen/item_min_height"
+            android:padding="@dimen/item_padding">
 
             <TextView
-                android:id="@+id/tv_train"
+                android:id="@+id/tv_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/item_padding"
-                android:text="@{ train.toString() }"
+                android:layout_marginEnd="@dimen/item_margin"
+                android:background="@drawable/round_shape"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@{ String.valueOf(train.locationOrder) }"
+                android:textAppearance="?textAppearanceListItem"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ train.locationName }"
                 android:textAlignment="viewStart"
                 android:textAppearance="?textAppearanceListItem"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintStart_toEndOf="@+id/tv_order"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Limerick" />
+
+            <TextView
+                android:id="@+id/tv_scheduled_departure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ `Scheduled: ` + train.scheduledDeparture }"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@+id/tv_expected_departure"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Scheduled: 17:56:30" />
+
+            <TextView
+                android:id="@+id/tv_expected_departure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{ `Expected: ` + train.expectedDeparture }"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toBottomOf="@id/tv_scheduled_departure"
+                tools:text="Expected: 17:56:30" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -22,9 +22,10 @@ class RemoteTrainsDataSource @Inject constructor(
         val response =
             retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainPositions().execute()
 
-        return response.body()?.trainPositions?.map {
-            it.asTrainPosition()
-        }
+        return response.body()
+            ?.trainPositions
+            ?.map { it.asTrainPosition() }
+            ?.sortedWith(compareBy({ it.status }, { it.code }))
     }
 
     override fun fetchTrainMovements(trainId: String): List<TrainMovement>? {
@@ -35,8 +36,9 @@ class RemoteTrainsDataSource @Inject constructor(
         val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java)
             .fetchTrainMovements(trainId = trainId).execute()
 
-        return response.body()?.trainsMovements?.map {
-            it.asTrainMovement()
-        }
+        return response.body()
+            ?.trainsMovements
+            ?.map { it.asTrainMovement() }
+            ?.sortedBy { it.locationOrder }
     }
 }
