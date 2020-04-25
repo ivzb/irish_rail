@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_trains"
+        android:title="@string/trains"
+        android:icon="@drawable/ic_train" />
+
+    <item android:id="@+id/navigation_stations"
+        android:title="@string/stations"
+        android:icon="@drawable/ic_station" />
+</menu>

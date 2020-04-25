@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/navigation_trains"
         android:name="com.ivzb.irish_rail.ui.trains.TrainsFragment"
-        android:label="@string/title_trains"
+        android:label="@string/trains"
         tools:layout="@layout/fragment_trains" />
 </navigation>
