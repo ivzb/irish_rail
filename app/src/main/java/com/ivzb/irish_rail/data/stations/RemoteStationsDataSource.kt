@@ -1,6 +1,7 @@
 package com.ivzb.irish_rail.data.stations
 
 import com.ivzb.irish_rail.model.Station
+import com.ivzb.irish_rail.model.StationDetails
 import com.ivzb.irish_rail.util.NetworkUtils
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -24,5 +25,18 @@ class RemoteStationsDataSource @Inject constructor(
             ?.stations
             ?.map { it.asStation() }
             ?.sortedBy { it.name }
+    }
+
+    override fun fetchStationDetails(stationCode: String): List<StationDetails>? {
+        if (!networkUtils.hasNetworkConnection()) {
+            return null
+        }
+
+        val response = retrofit.create<StationsAPI>(StationsAPI::class.java).fetchStationDetails(stationCode).execute()
+
+        return response.body()
+            ?.stationDetails
+            ?.map { it.asStationDetails() }
+            ?.sortedWith(compareBy({ it.time }, { it.trainCode }))
     }
 }

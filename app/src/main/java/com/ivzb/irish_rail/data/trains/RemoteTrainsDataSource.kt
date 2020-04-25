@@ -28,13 +28,13 @@ class RemoteTrainsDataSource @Inject constructor(
             ?.sortedWith(compareBy({ it.status }, { it.code }))
     }
 
-    override fun fetchTrainMovements(trainId: String): List<TrainMovement>? {
+    override fun fetchTrainMovements(trainCode: String): List<TrainMovement>? {
         if (!networkUtils.hasNetworkConnection()) {
             return null
         }
 
         val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java)
-            .fetchTrainMovements(trainId = trainId).execute()
+            .fetchTrainMovements(trainCode = trainCode).execute()
 
         return response.body()
             ?.trainsMovements

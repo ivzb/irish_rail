@@ -7,5 +7,5 @@ interface TrainsDataSource {
 
     fun fetchTrainPositions(): List<TrainPosition>?
 
-    fun fetchTrainMovements(trainId: String): List<TrainMovement>?
+    fun fetchTrainMovements(trainCode: String): List<TrainMovement>?
 }
