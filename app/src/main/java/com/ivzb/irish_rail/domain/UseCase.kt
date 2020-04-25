@@ -17,8 +17,6 @@ abstract class UseCase<in P, R> {
      *
      */
     operator fun invoke(parameters: P, result: MutableLiveData<Result<R>>) {
-        result.value = Result.Loading
-
         try {
             taskScheduler.execute {
                 try {

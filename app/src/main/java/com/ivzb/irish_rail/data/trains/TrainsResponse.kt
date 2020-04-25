@@ -1,5 +1,6 @@
 package com.ivzb.irish_rail.data.trains
 
+import com.ivzb.irish_rail.model.Train
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 

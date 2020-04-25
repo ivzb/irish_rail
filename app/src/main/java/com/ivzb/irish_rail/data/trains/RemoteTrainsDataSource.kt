@@ -1,5 +1,6 @@
 package com.ivzb.irish_rail.data.trains
 
+import com.ivzb.irish_rail.model.Train
 import com.ivzb.irish_rail.util.NetworkUtils
 import retrofit2.Retrofit
 import javax.inject.Inject
