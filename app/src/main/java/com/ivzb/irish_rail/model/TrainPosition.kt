@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(name = "objTrainPositions")
-data class Train(
+data class TrainPosition(
     @field:Element(name = "TrainCode") var code: String? = null,
     @field:Element(name = "TrainDate") var date: String? = null,
     @field:Element(name = "TrainStatus") var status: String? = null,

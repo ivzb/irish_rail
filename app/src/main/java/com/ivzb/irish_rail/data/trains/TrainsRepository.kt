@@ -8,8 +8,5 @@ import javax.inject.Singleton
  */
 @Singleton
 open class TrainsRepository @Inject constructor(
-    private val dataSource: TrainsDataSource
-) {
-
-    fun fetchTrains() = dataSource.fetchTrains()
-}
+    dataSource: TrainsDataSource
+) : TrainsDataSource by dataSource
