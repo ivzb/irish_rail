@@ -27,7 +27,7 @@ class TrainViewBinder(
         viewHolder.bind(model)
     }
 
-    override fun getTrainItemType(): Int = R.layout.item_train
+    override fun getItemType(): Int = R.layout.item_train
 
     override fun areItemsTheSame(oldItem: Train, newItem: Train): Boolean =
         oldItem.code == newItem.code
@@ -64,13 +64,13 @@ class EmptyTrainViewBinder : TrainItemViewBinder<TrainEmpty, EmptyViewHolder>(
 
     override fun createViewHolder(parent: ViewGroup): ViewHolder {
         return EmptyViewHolder(
-            LayoutInflater.from(parent.context).inflate(getTrainItemType(), parent, false)
+            LayoutInflater.from(parent.context).inflate(getItemType(), parent, false)
         )
     }
 
     override fun bindViewHolder(model: TrainEmpty, viewHolder: EmptyViewHolder) {}
 
-    override fun getTrainItemType() = R.layout.item_train_empty
+    override fun getItemType() = R.layout.item_train_empty
 
     override fun areItemsTheSame(oldItem: TrainEmpty, newItem: TrainEmpty) = true
 

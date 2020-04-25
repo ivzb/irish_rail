@@ -24,10 +24,14 @@ class StationsViewModel @Inject constructor(
         stations = fetchStationsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it.successOr(listOf()) ?: listOf()
+            it.successOr(listOf(StationEmpty)) ?: listOf(StationEmpty)
         }
 
         fetchStations()
+    }
+
+    fun click(station: Station) {
+
     }
 
     fun fetchStations() {

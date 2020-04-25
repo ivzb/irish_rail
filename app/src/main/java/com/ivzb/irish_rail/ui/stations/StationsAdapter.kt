@@ -1,21 +1,21 @@
-package com.ivzb.irish_rail.ui.trains
+package com.ivzb.irish_rail.ui.stations
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-typealias TrainItemClass = Class<out Any>
+typealias StationItemClass = Class<out Any>
 
-typealias TrainItemBinder = TrainItemViewBinder<Any, RecyclerView.ViewHolder>
+typealias StationItemBinder = StationItemViewBinder<Any, RecyclerView.ViewHolder>
 
-class TrainsAdapter(
-    private val viewBinders: Map<TrainItemClass, TrainItemBinder>
-) : ListAdapter<Any, RecyclerView.ViewHolder>(TrainsDiffCallback(viewBinders)) {
+class StationsAdapter(
+    private val viewBinders: Map<StationItemClass, StationItemBinder>
+) : ListAdapter<Any, RecyclerView.ViewHolder>(StationsDiffCallback(viewBinders)) {
 
     private val viewTypeToBinders = viewBinders.mapKeys { it.value.getItemType() }
 
-    private fun getViewBinder(viewType: Int): TrainItemBinder =
+    private fun getViewBinder(viewType: Int): StationItemBinder =
         viewTypeToBinders.getValue(viewType)
 
     override fun getItemViewType(position: Int): Int =
@@ -38,8 +38,8 @@ class TrainsAdapter(
     }
 }
 
-/** Encapsulates logic to create and bind a ViewHolder for a type of item in the Trains. */
-abstract class TrainItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
+/** Encapsulates logic to create and bind a ViewHolder for a type of item in the Stations. */
+abstract class StationItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
     val modelClass: Class<out M>
 ) : DiffUtil.ItemCallback<M>() {
 
@@ -53,8 +53,8 @@ abstract class TrainItemViewBinder<M, in VH : RecyclerView.ViewHolder>(
     open fun onViewDetachedFromWindow(viewHolder: VH) = Unit
 }
 
-internal class TrainsDiffCallback(
-    private val viewBinders: Map<TrainItemClass, TrainItemBinder>
+internal class StationsDiffCallback(
+    private val viewBinders: Map<StationItemClass, StationItemBinder>
 ) : DiffUtil.ItemCallback<Any>() {
 
     override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
