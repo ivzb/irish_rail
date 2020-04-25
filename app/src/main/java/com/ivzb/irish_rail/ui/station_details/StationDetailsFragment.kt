@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.databinding.FragmentStationDetailsBinding
+import com.ivzb.irish_rail.domain.EventObserver
+import com.ivzb.irish_rail.model.StationDetails
 import com.ivzb.irish_rail.ui.*
+import com.ivzb.irish_rail.ui.station_details.StationDetailsFragmentDirections.Companion.toTrainMovements
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -28,7 +32,8 @@ class StationDetailsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        stationDetailsViewModel = ViewModelProvider(this, viewModelFactory).get(StationDetailsViewModel::class.java)
+        stationDetailsViewModel =
+            ViewModelProvider(this, viewModelFactory).get(StationDetailsViewModel::class.java)
 
         binding = FragmentStationDetailsBinding.inflate(inflater, container, false).apply {
             viewModel = stationDetailsViewModel
@@ -38,6 +43,12 @@ class StationDetailsFragment : DaggerFragment() {
         stationDetailsViewModel.stationDetails.observe(viewLifecycleOwner, Observer {
             showStationDetails(binding.rvStationDetails, it)
         })
+
+        stationDetailsViewModel.stationDetailsClick.observe(
+            viewLifecycleOwner,
+            EventObserver { stationDetails ->
+                navigateToTrainMovements(stationDetails)
+            })
 
         requireArguments().apply {
             val (stationCode, stationName) = StationDetailsFragmentArgs.fromBundle(this)
@@ -76,4 +87,13 @@ class StationDetailsFragment : DaggerFragment() {
 
         (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
+
+    private fun navigateToTrainMovements(stationDetails: StationDetails) =
+        findNavController().navigate(
+            toTrainMovements(
+                stationDetails.trainCode,
+                stationDetails.date,
+                stationDetails.direction
+            )
+        )
 }

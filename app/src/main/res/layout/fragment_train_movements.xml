@@ -26,8 +26,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_trains"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:paddingTop="@dimen/item_padding"
                 android:paddingBottom="@dimen/item_padding"

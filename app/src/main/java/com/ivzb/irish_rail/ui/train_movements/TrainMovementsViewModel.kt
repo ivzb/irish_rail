@@ -3,6 +3,7 @@ package com.ivzb.irish_rail.ui.train_movements
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
 import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.domain.trains.FetchTrainMovementsUseCase
@@ -19,6 +20,8 @@ class TrainMovementsViewModel @Inject constructor(
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
+    val trainClick: MutableLiveData<Event<TrainMovement>> = MutableLiveData()
+
     private val fetchTrainsResult = MutableLiveData<Result<List<TrainMovement>?>>()
 
     init {
@@ -30,7 +33,7 @@ class TrainMovementsViewModel @Inject constructor(
     }
 
     fun click(trainMovement: TrainMovement) {
-
+        trainClick.postValue(Event(trainMovement))
     }
 
     fun fetchTrains(trainId: String) {

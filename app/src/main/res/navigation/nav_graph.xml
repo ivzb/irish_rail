@@ -33,6 +33,10 @@
         <argument
             android:name="direction"
             app:argType="string" />
+
+        <action
+            android:id="@+id/to_station_details"
+            app:destination="@id/navigation_station_details" />
     </fragment>
 
     <fragment
@@ -59,5 +63,9 @@
         <argument
             android:name="stationName"
             app:argType="string" />
+
+        <action
+            android:id="@+id/to_train_movements"
+            app:destination="@id/navigation_train_movements" />
     </fragment>
 </navigation>

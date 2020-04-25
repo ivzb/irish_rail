@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ivzb.irish_rail.databinding.FragmentTrainMovementsBinding
+import com.ivzb.irish_rail.domain.EventObserver
+import com.ivzb.irish_rail.model.TrainMovement
 import com.ivzb.irish_rail.ui.*
+import com.ivzb.irish_rail.ui.train_movements.TrainMovementsFragmentDirections.Companion.toStationDetails
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -37,6 +41,10 @@ class TrainMovementsFragment : DaggerFragment() {
 
         trainsViewModel.trains.observe(viewLifecycleOwner, Observer {
             showTrains(binding.rvTrains, it)
+        })
+
+        trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver { trainMovement ->
+            navigateToStationDetails(trainMovement)
         })
 
         requireArguments().apply {
@@ -76,4 +84,12 @@ class TrainMovementsFragment : DaggerFragment() {
 
         (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
+
+    private fun navigateToStationDetails(trainMovement: TrainMovement) =
+        findNavController().navigate(
+            toStationDetails(
+                trainMovement.locationCode,
+                trainMovement.locationName
+            )
+        )
 }
