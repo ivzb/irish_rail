@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentTrainPositionsBinding
+import com.ivzb.irish_rail.domain.EventObserver
+import com.ivzb.irish_rail.model.TrainPosition
 import com.ivzb.irish_rail.ui.*
+import com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragmentDirections.Companion.toTrainMovements
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -28,7 +35,8 @@ class TrainPositionsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        trainsViewModel = ViewModelProvider(this, viewModelFactory).get(TrainPositionsViewModel::class.java)
+        trainsViewModel =
+            ViewModelProvider(this, viewModelFactory).get(TrainPositionsViewModel::class.java)
 
         binding = FragmentTrainPositionsBinding.inflate(inflater, container, false).apply {
             viewModel = trainsViewModel
@@ -37,6 +45,12 @@ class TrainPositionsFragment : DaggerFragment() {
 
         trainsViewModel.trains.observe(viewLifecycleOwner, Observer {
             showTrains(binding.rvTrains, it)
+        })
+
+        trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver { trainPosition ->
+            trainPosition.code?.apply {
+                navigateToTrainMovements(this)
+            } ?: showError(R.string.invalid_train_position)
         })
 
         return binding.root
@@ -68,4 +82,10 @@ class TrainPositionsFragment : DaggerFragment() {
 
         (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
     }
+
+    private fun navigateToTrainMovements(trainCode: String) =
+        findNavController().navigate(toTrainMovements(trainCode))
+
+    private fun showError(@StringRes messageResId: Int) =
+        Toast.makeText(requireContext(), messageResId, Toast.LENGTH_LONG).show()
 }

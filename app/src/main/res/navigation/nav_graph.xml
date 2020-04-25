@@ -9,7 +9,12 @@
         android:id="@+id/navigation_train_positions"
         android:name="com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragment"
         android:label="@string/trains"
-        tools:layout="@layout/fragment_train_positions" />
+        tools:layout="@layout/fragment_train_positions">
+
+        <action
+            android:id="@+id/to_train_movements"
+            app:destination="@id/navigation_train_movements" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_train_movements"

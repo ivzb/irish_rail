@@ -29,7 +29,7 @@ class RemoteTrainsDataSource @Inject constructor(
             return null
         }
 
-        val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainMovements(traindId).execute()
+        val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainMovements(trainId = traindId).execute()
 
         return response.body()?.trainsMovements
     }

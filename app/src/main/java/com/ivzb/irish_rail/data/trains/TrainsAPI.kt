@@ -10,5 +10,8 @@ interface TrainsAPI {
     fun fetchTrainPositions(): Call<TrainPositionsResponse>
 
     @GET("/realtime/realtime.asmx/getTrainMovementsXML")
-    fun fetchTrainMovements(@Query("TrainId") trainId: String): Call<TrainMovementsResponse>
+    fun fetchTrainMovements(
+        @Query("TrainId") trainId: String = "",
+        @Query("TrainDate") trainDate: String = ""
+    ): Call<TrainMovementsResponse>
 }
