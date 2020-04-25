@@ -19,18 +19,24 @@ class RemoteTrainsDataSource @Inject constructor(
             return null
         }
 
-        val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainPositions().execute()
+        val response =
+            retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainPositions().execute()
 
-        return response.body()?.trainPositions
+        return response.body()?.trainPositions?.map {
+            it.asTrainPosition()
+        }
     }
 
-    override fun fetchTrainMovements(traindId: String): List<TrainMovement>? {
+    override fun fetchTrainMovements(trainId: String): List<TrainMovement>? {
         if (!networkUtils.hasNetworkConnection()) {
             return null
         }
 
-        val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java).fetchTrainMovements(trainId = traindId).execute()
+        val response = retrofit.create<TrainsAPI>(TrainsAPI::class.java)
+            .fetchTrainMovements(trainId = trainId).execute()
 
-        return response.body()?.trainsMovements
+        return response.body()?.trainsMovements?.map {
+            it.asTrainMovement()
+        }
     }
 }

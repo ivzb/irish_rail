@@ -1,10 +1,9 @@
-package com.ivzb.irish_rail.data.trains
+package com.ivzb.irish_rail.model
 
-import com.ivzb.irish_rail.model.TrainMovement
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root(name = "ArrayOfObjTrainMovements", strict = false)
 data class TrainMovementsResponse internal constructor(
-    @field:ElementList(inline = true) var trainsMovements: List<TrainMovement>? = null
+    @field:ElementList(inline = true) var trainsMovements: List<TrainMovementResponse>? = null
 )

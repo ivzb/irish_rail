@@ -20,6 +20,8 @@ class RemoteStationsDataSource @Inject constructor(
 
         val response = retrofit.create<StationsAPI>(StationsAPI::class.java).fetchStations().execute()
 
-        return response.body()?.stations
+        return response.body()?.stations?.map {
+            it.asStation()
+        }
     }
 }
