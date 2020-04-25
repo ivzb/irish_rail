@@ -2,6 +2,7 @@ package com.ivzb.irish_rail.di
 
 import com.ivzb.irish_rail.ui.main.MainActivity
 import com.ivzb.irish_rail.ui.main.MainModule
+import com.ivzb.irish_rail.ui.stations.StationsModule
 import com.ivzb.irish_rail.ui.trains.TrainsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,7 +23,8 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(
         modules = [
             MainModule::class,
-            TrainsModule::class
+            TrainsModule::class,
+            StationsModule::class
         ]
     )
     internal abstract fun mainActivity(): MainActivity

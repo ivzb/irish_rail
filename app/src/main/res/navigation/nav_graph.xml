@@ -10,4 +10,10 @@
         android:name="com.ivzb.irish_rail.ui.trains.TrainsFragment"
         android:label="@string/trains"
         tools:layout="@layout/fragment_trains" />
+
+    <fragment
+        android:id="@+id/navigation_stations"
+        android:name="com.ivzb.irish_rail.ui.stations.StationsFragment"
+        android:label="@string/stations"
+        tools:layout="@layout/fragment_stations" />
 </navigation>
