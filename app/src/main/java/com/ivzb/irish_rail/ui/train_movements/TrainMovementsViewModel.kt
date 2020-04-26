@@ -5,12 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
-import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.domain.trains.FetchTrainMovementsUseCase
 import com.ivzb.irish_rail.model.ui.train.TrainMovement
-import com.ivzb.irish_rail.ui.Empty
-import com.ivzb.irish_rail.ui.NoConnection
 import com.ivzb.irish_rail.util.map
+import com.ivzb.irish_rail.util.mapFetchResult
 import javax.inject.Inject
 
 class TrainMovementsViewModel @Inject constructor(
@@ -28,7 +26,8 @@ class TrainMovementsViewModel @Inject constructor(
         trains = fetchTrainsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it?.successOr(listOf(NoConnection)) ?: listOf(Empty)
+
+            mapFetchResult(it)
         }
     }
 

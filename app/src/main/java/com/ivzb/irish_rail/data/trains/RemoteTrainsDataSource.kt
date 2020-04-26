@@ -26,6 +26,7 @@ class RemoteTrainsDataSource @Inject constructor(
             ?.trainPositions
             ?.map { it.asTrainPosition() }
             ?.sortedWith(compareBy({ it.status }, { it.code }))
+            ?: emptyList()
     }
 
     override fun fetchTrainMovements(trainCode: String): List<TrainMovement>? {
@@ -40,5 +41,6 @@ class RemoteTrainsDataSource @Inject constructor(
             ?.trainsMovements
             ?.map { it.asTrainMovement() }
             ?.sortedBy { it.locationOrder }
+            ?: emptyList()
     }
 }

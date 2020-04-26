@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.ivzb.irish_rail.domain.Event
 import com.ivzb.irish_rail.domain.Result
 import com.ivzb.irish_rail.domain.stations.FetchStationDetailsUseCase
-import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.model.ui.station.StationDetails
-import com.ivzb.irish_rail.ui.Empty
-import com.ivzb.irish_rail.ui.NoConnection
 import com.ivzb.irish_rail.util.map
+import com.ivzb.irish_rail.util.mapFetchResult
 import javax.inject.Inject
 
 class StationDetailsViewModel @Inject constructor(
@@ -18,8 +16,8 @@ class StationDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val stationDetails: LiveData<List<Any>>
-    val loading= MutableLiveData<Boolean>()
-    val stationDetailsClick= MutableLiveData<Event<StationDetails>>()
+    val loading = MutableLiveData<Boolean>()
+    val stationDetailsClick = MutableLiveData<Event<StationDetails>>()
     val searchQuery = MutableLiveData<String>()
 
     private val fetchStationDetailsResult = MutableLiveData<Result<List<StationDetails>?>>()
@@ -28,7 +26,8 @@ class StationDetailsViewModel @Inject constructor(
         stationDetails = fetchStationDetailsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it?.successOr(listOf(NoConnection)) ?: listOf(Empty)
+
+            mapFetchResult(it)
         }
     }
 

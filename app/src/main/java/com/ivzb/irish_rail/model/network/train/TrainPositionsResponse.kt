@@ -5,5 +5,5 @@ import org.simpleframework.xml.Root
 
 @Root(name = "ArrayOfObjTrainPositions", strict = false)
 data class TrainPositionsResponse internal constructor(
-    @field:ElementList(inline = true) var trainPositions: List<TrainPositionResponse>? = null
+    @field:ElementList(inline = true, required = false) var trainPositions: List<TrainPositionResponse>? = null
 )

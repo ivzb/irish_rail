@@ -26,6 +26,7 @@ class RemoteStationsDataSource @Inject constructor(
             ?.map { it.asStation() }
             ?.distinctBy { it.name }
             ?.sortedBy { it.name }
+            ?: emptyList()
     }
 
     override fun fetchStationDetails(stationCode: String): List<StationDetails>? {
@@ -39,5 +40,6 @@ class RemoteStationsDataSource @Inject constructor(
             ?.stationDetails
             ?.map { it.asStationDetails() }
             ?.sortedWith(compareBy({ it.time }, { it.trainCode }))
+            ?: emptyList()
     }
 }
