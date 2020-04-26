@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Launcher screen theme. -->
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launcher</item>
+    </style>
+
 </resources>

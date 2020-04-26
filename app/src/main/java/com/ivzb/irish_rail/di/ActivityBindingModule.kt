@@ -1,5 +1,7 @@
 package com.ivzb.irish_rail.di
 
+import com.ivzb.irish_rail.ui.launcher.LauncherActivity
+import com.ivzb.irish_rail.ui.launcher.LauncherModule
 import com.ivzb.irish_rail.ui.main.MainActivity
 import com.ivzb.irish_rail.ui.main.MainModule
 import com.ivzb.irish_rail.ui.station_details.StationDetailsModule
@@ -20,6 +22,10 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class ActivityBindingModule {
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [LauncherModule::class])
+    internal abstract fun launcherActivity(): LauncherActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ivzb.irish_rail.R
@@ -43,6 +44,10 @@ fun Fragment.createSearchMenu(
     }
 }
 
-inline fun <reified T : ViewModel> Fragment.provideViewModel(
+inline fun <reified VM : ViewModel> FragmentActivity.provideViewModel(
     viewModelFactory: ViewModelProvider.Factory
-): T = ViewModelProvider(this, viewModelFactory).get(T::class.java)
+): VM = ViewModelProvider(this, viewModelFactory).get(VM::class.java)
+
+inline fun <reified VM : ViewModel> Fragment.provideViewModel(
+    viewModelFactory: ViewModelProvider.Factory
+): VM = ViewModelProvider(this, viewModelFactory).get(VM::class.java)
