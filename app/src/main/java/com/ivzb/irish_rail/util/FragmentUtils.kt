@@ -37,6 +37,7 @@ fun Fragment.createSearchMenu(
                 }
             }
 
+            setQuery("", true)
             queryHint = getString(R.string.search)
             isIconifiedByDefault = false
             isIconified = false
@@ -51,6 +52,14 @@ fun Fragment.updateTitle(title: String, query: String? = null) {
 
 fun Fragment.updateTitle(@StringRes title: Int, query: String? = null) {
     updateTitle(getString(title), query)
+}
+
+fun Fragment.closeSearch(searchItem: MenuItem?) {
+    searchItem?.collapseActionView()
+}
+
+fun Fragment.clearSearch(searchItem: MenuItem?) {
+    (searchItem?.actionView as? SearchView)?.setQuery("", true)
 }
 
 inline fun <reified VM : ViewModel> FragmentActivity.provideViewModel(

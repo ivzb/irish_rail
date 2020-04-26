@@ -13,9 +13,7 @@ import com.ivzb.irish_rail.domain.EventObserver
 import com.ivzb.irish_rail.model.ui.station.StationDetails
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.station_details.StationDetailsFragmentDirections.Companion.toTrainMovements
-import com.ivzb.irish_rail.util.createSearchMenu
-import com.ivzb.irish_rail.util.provideViewModel
-import com.ivzb.irish_rail.util.updateTitle
+import com.ivzb.irish_rail.util.*
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -50,7 +48,8 @@ class StationDetailsFragment : DaggerFragment() {
 
         stationDetailsViewModel.stationDetailsClick.observe(viewLifecycleOwner, EventObserver {
             navigateToTrainMovements(it)
-            closeSearch()
+            closeSearch(searchItem)
+            clearSearch(searchItem)
         })
 
         stationDetailsViewModel.searchQuery.observe(viewLifecycleOwner, Observer {
@@ -81,7 +80,7 @@ class StationDetailsFragment : DaggerFragment() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                closeSearch()
+                closeSearch(searchItem)
                 return true
             }
         })
@@ -123,9 +122,5 @@ class StationDetailsFragment : DaggerFragment() {
 
     private fun filterStationDetails(query: String) {
         adapter?.filter?.filter(query)
-    }
-
-    private fun closeSearch() {
-        searchItem?.collapseActionView()
     }
 }
