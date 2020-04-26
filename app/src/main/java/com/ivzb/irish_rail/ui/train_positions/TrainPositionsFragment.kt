@@ -27,6 +27,7 @@ class TrainPositionsFragment : DaggerFragment() {
     private lateinit var binding: FragmentTrainPositionsBinding
 
     private var adapter: ItemAdapter? = null
+    private var searchItem: MenuItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +48,7 @@ class TrainPositionsFragment : DaggerFragment() {
 
         trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver { trainPosition ->
             navigateToTrainMovements(trainPosition)
+            closeSearch()
         })
 
         trainsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
@@ -69,9 +71,12 @@ class TrainPositionsFragment : DaggerFragment() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
+                closeSearch()
                 return true
             }
         })
+
+        searchItem = menu.findItem(R.id.search)
     }
 
     private fun showTrains(recyclerView: RecyclerView, list: List<Any>) {
@@ -108,5 +113,9 @@ class TrainPositionsFragment : DaggerFragment() {
 
     private fun filterTrains(query: String) {
         adapter?.filter?.filter(query)
+    }
+
+    private fun closeSearch() {
+        searchItem?.collapseActionView()
     }
 }

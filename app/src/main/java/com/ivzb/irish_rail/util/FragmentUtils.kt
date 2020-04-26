@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -24,11 +25,8 @@ fun Fragment.createSearchMenu(
         val searchView: SearchView? = searchItem?.actionView as SearchView
 
         searchView?.apply {
-            isIconified = false
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-
             setOnQueryTextListener(searchListener)
-
             setOnQueryTextFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
                     view.showKeyboard()
@@ -36,6 +34,11 @@ fun Fragment.createSearchMenu(
                     view.dismissKeyboard()
                 }
             }
+
+            queryHint = getString(R.string.search)
+            isIconifiedByDefault = false
+            isIconified = false
+            requestFocus()
         }
     }
 }

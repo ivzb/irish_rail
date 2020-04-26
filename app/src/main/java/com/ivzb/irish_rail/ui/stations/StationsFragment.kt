@@ -27,6 +27,7 @@ class StationsFragment : DaggerFragment() {
     private lateinit var binding: FragmentStationsBinding
 
     private var adapter: ItemAdapter? = null
+    private var searchItem: MenuItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +48,7 @@ class StationsFragment : DaggerFragment() {
 
         stationsViewModel.stationClick.observe(viewLifecycleOwner, EventObserver { station ->
             navigateToStationDetails(station)
+            closeSearch()
         })
 
         stationsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
@@ -69,9 +71,12 @@ class StationsFragment : DaggerFragment() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
+                closeSearch()
                 return true
             }
         })
+
+        searchItem = menu.findItem(R.id.search)
     }
 
     private fun showStations(recyclerView: RecyclerView, list: List<Any>) {
@@ -108,5 +113,9 @@ class StationsFragment : DaggerFragment() {
 
     private fun filterStations(query: String) {
         adapter?.filter?.filter(query)
+    }
+
+    private fun closeSearch() {
+        searchItem?.collapseActionView()
     }
 }

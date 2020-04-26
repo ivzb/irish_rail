@@ -8,7 +8,6 @@ import com.ivzb.irish_rail.domain.trains.FetchTrainPositionsUseCase
 import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.ui.Empty
 import com.ivzb.irish_rail.util.map
-import com.ivzb.irish_rail.util.switchMap
 import javax.inject.Inject
 
 class TrainPositionsViewModel @Inject constructor(
@@ -16,11 +15,8 @@ class TrainPositionsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val trains: LiveData<List<Any>>
-
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-
     val trainClick: MutableLiveData<Event<TrainPosition>> = MutableLiveData()
-
     val searchQuery = MutableLiveData<String>()
 
     private val fetchTrainsResult = MutableLiveData<Result<List<TrainPosition>?>>()

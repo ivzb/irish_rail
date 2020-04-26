@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentStationDetailsBinding
 import com.ivzb.irish_rail.domain.EventObserver
 import com.ivzb.irish_rail.model.ui.station.StationDetails
@@ -26,6 +27,7 @@ class StationDetailsFragment : DaggerFragment() {
     private lateinit var binding: FragmentStationDetailsBinding
 
     private var adapter: ItemAdapter? = null
+    private var searchItem: MenuItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +50,7 @@ class StationDetailsFragment : DaggerFragment() {
             viewLifecycleOwner,
             EventObserver { stationDetails ->
                 navigateToTrainMovements(stationDetails)
+                closeSearch()
             })
 
         stationDetailsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
@@ -76,9 +79,12 @@ class StationDetailsFragment : DaggerFragment() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
+                closeSearch()
                 return true
             }
         })
+
+        searchItem = menu.findItem(R.id.search)
     }
 
     private fun showStationDetails(recyclerView: RecyclerView, list: List<Any>) {
@@ -115,5 +121,9 @@ class StationDetailsFragment : DaggerFragment() {
 
     private fun filterStationDetails(query: String) {
         adapter?.filter?.filter(query)
+    }
+
+    private fun closeSearch() {
+        searchItem?.collapseActionView()
     }
 }

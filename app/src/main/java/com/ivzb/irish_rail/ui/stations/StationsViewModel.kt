@@ -17,11 +17,8 @@ class StationsViewModel @Inject constructor(
 ): ViewModel() {
 
     val stations: LiveData<List<Any>>
-
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-
     val stationClick: MutableLiveData<Event<Station>> = MutableLiveData()
-
     val searchQuery = MutableLiveData<String>()
 
     private val fetchStationsResult = MutableLiveData<Result<List<Station>?>>()
