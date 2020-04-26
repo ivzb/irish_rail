@@ -5,6 +5,7 @@
     <string name="trains">Trains</string>
     <string name="stations">Stations</string>
     <string name="station_details">Station Details</string>
-    <string name="data_not_available">No more departures for today.</string>
+    <string name="data_not_available">No departures found for the next 90 minutes.</string>
     <string name="invalid_train_position">Invalid train position</string>
+    <string name="search">Search</string>
 </resources>

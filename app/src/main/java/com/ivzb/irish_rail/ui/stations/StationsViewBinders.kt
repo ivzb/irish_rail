@@ -8,6 +8,7 @@ import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.ItemStationBinding
 import com.ivzb.irish_rail.model.ui.station.Station
 import com.ivzb.irish_rail.ui.ItemViewBinder
+import com.ivzb.irish_rail.ui.QueryMatcher
 
 class StationViewBinder(
     private val lifecycleOwner: LifecycleOwner,
@@ -50,5 +51,17 @@ class StationViewHolder(
         binding.cvStation.setOnClickListener {
             stationsViewModel.click(station)
         }
+    }
+}
+
+class StationQueryMatcher : QueryMatcher {
+
+    override fun matches(item: Any, query: String): Boolean {
+        if (item is Station) {
+            listOf(item.code, item.name)
+                .forEach { if (it.contains(query, ignoreCase = true)) return true }
+        }
+
+        return false
     }
 }

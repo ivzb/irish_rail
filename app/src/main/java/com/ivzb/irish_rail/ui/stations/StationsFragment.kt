@@ -1,9 +1,8 @@
 package com.ivzb.irish_rail.ui.stations
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProvider
@@ -12,11 +11,10 @@ import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.FragmentStationsBinding
 import com.ivzb.irish_rail.domain.EventObserver
 import com.ivzb.irish_rail.model.ui.station.Station
-import com.ivzb.irish_rail.ui.EmptyViewBinder
-import com.ivzb.irish_rail.ui.ItemAdapter
-import com.ivzb.irish_rail.ui.ItemBinder
-import com.ivzb.irish_rail.ui.ItemClass
+import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.stations.StationsFragmentDirections.Companion.toStationDetails
+import com.ivzb.irish_rail.util.createSearchMenu
+import com.ivzb.irish_rail.util.provideViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -36,8 +34,7 @@ class StationsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        stationsViewModel =
-            ViewModelProvider(this, viewModelFactory).get(StationsViewModel::class.java)
+        stationsViewModel = provideViewModel(viewModelFactory)
 
         binding = FragmentStationsBinding.inflate(inflater, container, false).apply {
             viewModel = stationsViewModel
@@ -52,36 +49,53 @@ class StationsFragment : DaggerFragment() {
             navigateToStationDetails(station)
         })
 
+        stationsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
+            filterStations(query)
+        })
+
+        setHasOptionsMenu(true)
         requireActivity().title = getString(R.string.title_stations)
 
         return binding.root
     }
 
-    private fun showStations(recyclerView: RecyclerView, list: List<Any>?) {
-        if (adapter == null) {
-            val stationsViewBinder = StationViewBinder(this, stationsViewModel)
-            val emptyViewBinder = EmptyViewBinder()
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater)
 
-            val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
-                put(
-                    stationsViewBinder.modelClass,
-                    stationsViewBinder as ItemBinder
-                )
-
-                put(
-                    emptyViewBinder.modelClass,
-                    emptyViewBinder as ItemBinder
-                )
+        createSearchMenu(menu, menuInflater, object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                stationsViewModel.search(query)
+                return true
             }
 
-            adapter = ItemAdapter(viewBinders)
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
+    }
+
+    private fun showStations(recyclerView: RecyclerView, list: List<Any>) {
+        if (adapter == null) {
+            adapter = createAdapter()
         }
 
         if (recyclerView.adapter == null) {
             recyclerView.adapter = adapter
         }
 
-        (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
+        (recyclerView.adapter as ItemAdapter).setList(list)
+    }
+
+    private fun createAdapter(): ItemAdapter {
+        val stationsViewBinder = StationViewBinder(this, stationsViewModel)
+        val emptyViewBinder = EmptyViewBinder()
+        val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
+            put(stationsViewBinder.modelClass, stationsViewBinder as ItemBinder)
+            put(emptyViewBinder.modelClass, emptyViewBinder as ItemBinder)
+        }
+        val queryMatcher = StationQueryMatcher()
+
+        return ItemAdapter(viewBinders, queryMatcher)
     }
 
     private fun navigateToStationDetails(station: Station) =
@@ -91,4 +105,8 @@ class StationsFragment : DaggerFragment() {
                 station.name
             )
         )
+
+    private fun filterStations(query: String) {
+        adapter?.filter?.filter(query)
+    }
 }

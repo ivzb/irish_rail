@@ -1,9 +1,8 @@
 package com.ivzb.irish_rail.ui.train_positions
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +13,8 @@ import com.ivzb.irish_rail.domain.EventObserver
 import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragmentDirections.Companion.toTrainMovements
+import com.ivzb.irish_rail.util.createSearchMenu
+import com.ivzb.irish_rail.util.provideViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -33,8 +34,7 @@ class TrainPositionsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        trainsViewModel =
-            ViewModelProvider(this, viewModelFactory).get(TrainPositionsViewModel::class.java)
+        trainsViewModel = provideViewModel(viewModelFactory)
 
         binding = FragmentTrainPositionsBinding.inflate(inflater, container, false).apply {
             viewModel = trainsViewModel
@@ -49,36 +49,53 @@ class TrainPositionsFragment : DaggerFragment() {
             navigateToTrainMovements(trainPosition)
         })
 
+        trainsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
+            filterTrains(query)
+        })
+
+        setHasOptionsMenu(true)
         requireActivity().title = getString(R.string.title_trains)
 
         return binding.root
     }
 
-    private fun showTrains(recyclerView: RecyclerView, list: List<Any>?) {
-        if (adapter == null) {
-            val trainsViewBinder = TrainPositionsViewBinder(this, trainsViewModel)
-            val emptyViewBinder = EmptyViewBinder()
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater)
 
-            val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
-                put(
-                    trainsViewBinder.modelClass,
-                    trainsViewBinder as ItemBinder
-                )
-
-                put(
-                    emptyViewBinder.modelClass,
-                    emptyViewBinder as ItemBinder
-                )
+        createSearchMenu(menu, menuInflater, object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                trainsViewModel.search(query)
+                return true
             }
 
-            adapter = ItemAdapter(viewBinders)
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
+    }
+
+    private fun showTrains(recyclerView: RecyclerView, list: List<Any>) {
+        if (adapter == null) {
+            adapter = createAdapter()
         }
 
         if (recyclerView.adapter == null) {
             recyclerView.adapter = adapter
         }
 
-        (recyclerView.adapter as ItemAdapter).submitList(list ?: emptyList())
+        (recyclerView.adapter as ItemAdapter).setList(list)
+    }
+
+    private fun createAdapter(): ItemAdapter {
+        val trainsViewBinder = TrainPositionsViewBinder(this, trainsViewModel)
+        val emptyViewBinder = EmptyViewBinder()
+        val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
+            put(trainsViewBinder.modelClass, trainsViewBinder as ItemBinder)
+            put(emptyViewBinder.modelClass, emptyViewBinder as ItemBinder)
+        }
+        val queryMatcher = TrainPositionQueryMatcher()
+
+        return ItemAdapter(viewBinders, queryMatcher)
     }
 
     private fun navigateToTrainMovements(trainPosition: TrainPosition) =
@@ -88,4 +105,8 @@ class TrainPositionsFragment : DaggerFragment() {
                 trainPosition.direction
             )
         )
+
+    private fun filterTrains(query: String) {
+        adapter?.filter?.filter(query)
+    }
 }

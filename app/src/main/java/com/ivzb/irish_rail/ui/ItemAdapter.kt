@@ -3,6 +3,8 @@ package com.ivzb.irish_rail.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +15,13 @@ typealias ItemClass = Class<out Any>
 typealias ItemBinder = ItemViewBinder<Any, RecyclerView.ViewHolder>
 
 class ItemAdapter(
-    private val viewBinders: Map<ItemClass, ItemBinder>
-) : ListAdapter<Any, RecyclerView.ViewHolder>(ItemDiffCallback(viewBinders)) {
+    private val viewBinders: Map<ItemClass, ItemBinder>,
+    private val queryMatcher: QueryMatcher
+) : ListAdapter<Any, RecyclerView.ViewHolder>(ItemDiffCallback(viewBinders)), Filterable {
 
     private val viewTypeToBinders = viewBinders.mapKeys { it.value.getItemType() }
+    private val filter: Filter = ItemFilter()
+    private var list: List<Any>? = null
 
     private fun getViewBinder(viewType: Int): ItemBinder =
         viewTypeToBinders.getValue(viewType)
@@ -39,6 +44,38 @@ class ItemAdapter(
         getViewBinder(holder.itemViewType).onViewDetachedFromWindow(holder)
         super.onViewDetachedFromWindow(holder)
     }
+
+    fun setList(list: List<Any>) {
+        this.list = list
+        submitList(list)
+    }
+
+    override fun getFilter(): Filter {
+        return filter
+    }
+
+    /** Async item filter **/
+    private inner class ItemFilter : Filter() {
+
+        override fun performFiltering(sequence: CharSequence?): FilterResults {
+            val query = sequence?.toString() ?: ""
+            val filteredList = list?.filter { queryMatcher.matches(it, query) }
+
+            return FilterResults().apply {
+                values = filteredList
+            }
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            submitList(results?.values as? List<Any>)
+        }
+    }
+}
+
+/** Used to filter search query, should be implemented by each type of item. */
+interface QueryMatcher {
+
+    fun matches(item: Any, query: String): Boolean
 }
 
 /** Encapsulates logic to create and bind a ViewHolder for a type of item. */

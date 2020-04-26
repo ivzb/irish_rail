@@ -22,6 +22,8 @@ class StationDetailsViewModel @Inject constructor(
 
     val stationDetailsClick: MutableLiveData<Event<StationDetails>> = MutableLiveData()
 
+    val searchQuery = MutableLiveData<String>()
+
     private val fetchStationDetailsResult = MutableLiveData<Result<List<StationDetails>?>>()
 
     init {
@@ -39,5 +41,9 @@ class StationDetailsViewModel @Inject constructor(
     fun fetchStationDetails(stationCode: String) {
         loading.postValue(true)
         fetchStationDetailsUseCase(stationCode, fetchStationDetailsResult)
+    }
+
+    fun search(query: String?) {
+        searchQuery.postValue(query ?: "")
     }
 }

@@ -22,6 +22,8 @@ class TrainMovementsViewModel @Inject constructor(
 
     val trainClick: MutableLiveData<Event<TrainMovement>> = MutableLiveData()
 
+    val searchQuery = MutableLiveData<String>()
+
     private val fetchTrainsResult = MutableLiveData<Result<List<TrainMovement>?>>()
 
     init {
@@ -39,5 +41,9 @@ class TrainMovementsViewModel @Inject constructor(
     fun fetchTrains(trainId: String) {
         loading.postValue(true)
         fetchTrainMovementsUseCase(trainId, fetchTrainsResult)
+    }
+
+    fun search(query: String?) {
+        searchQuery.postValue(query ?: "")
     }
 }

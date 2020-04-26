@@ -8,6 +8,7 @@ import com.ivzb.irish_rail.R
 import com.ivzb.irish_rail.databinding.ItemTrainPositionBinding
 import com.ivzb.irish_rail.model.ui.train.TrainPosition
 import com.ivzb.irish_rail.ui.ItemViewBinder
+import com.ivzb.irish_rail.ui.QueryMatcher
 
 class TrainPositionsViewBinder(
     private val lifecycleOwner: LifecycleOwner,
@@ -50,5 +51,17 @@ class TrainPositionViewHolder(
         binding.cvTrain.setOnClickListener {
             trainsViewModel.click(train)
         }
+    }
+}
+
+class TrainPositionQueryMatcher : QueryMatcher {
+
+    override fun matches(item: Any, query: String): Boolean {
+        if (item is TrainPosition) {
+            listOf(item.code, item.message)
+                .forEach { if (it.contains(query, ignoreCase = true)) return true }
+        }
+
+        return false
     }
 }
