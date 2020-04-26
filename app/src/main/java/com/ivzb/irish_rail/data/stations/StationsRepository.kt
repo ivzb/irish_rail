@@ -9,4 +9,4 @@ import javax.inject.Singleton
 @Singleton
 open class StationsRepository @Inject constructor(
     dataSource: StationsDataSource
-): StationsDataSource by dataSource
+) : StationsDataSource by dataSource

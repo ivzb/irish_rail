@@ -32,13 +32,13 @@ class TrainPositionsViewModel @Inject constructor(
         fetchTrains()
     }
 
-    fun click(trainPosition: TrainPosition) {
-        trainClick.postValue(Event(trainPosition))
-    }
-
     fun fetchTrains() {
         loading.postValue(true)
         fetchTrainPositionsUseCase(Unit, fetchTrainsResult)
+    }
+
+    fun click(trainPosition: TrainPosition) {
+        trainClick.postValue(Event(trainPosition))
     }
 
     fun search(query: String?) {

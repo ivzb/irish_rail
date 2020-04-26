@@ -66,6 +66,9 @@ dependencies {
     // Unit tests
     testImplementation "junit:junit:$junitVersion"
 
+    // Unit tests livedata
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archTestingVersion"
+
     // Instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"

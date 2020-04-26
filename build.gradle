@@ -18,6 +18,7 @@ buildscript {
         junitVersion = '4.12'
         extJunitVersion = '1.1.0'
         espressoVersion = '3.1.1'
+        archTestingVersion = '2.0.0'
     }
 
     repositories {
