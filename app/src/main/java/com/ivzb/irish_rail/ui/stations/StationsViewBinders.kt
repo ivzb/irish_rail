@@ -60,8 +60,10 @@ class StationQueryMatcher : QueryMatcher {
         if (item is Station) {
             listOf(item.code, item.name)
                 .forEach { if (it.contains(query, ignoreCase = true)) return true }
+
+            return false
         }
 
-        return false
+        return true
     }
 }

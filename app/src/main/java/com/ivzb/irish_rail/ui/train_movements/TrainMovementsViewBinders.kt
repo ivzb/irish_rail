@@ -60,8 +60,10 @@ class TrainMovementQueryMatcher : QueryMatcher {
         if (item is TrainMovement) {
             listOf(item.code, item.locationName, item.locationCode)
                 .forEach { if (it.contains(query, ignoreCase = true)) return true }
+
+            return false
         }
 
-        return false
+        return true
     }
 }
