@@ -9,6 +9,7 @@ import com.ivzb.irish_rail.domain.stations.FetchStationDetailsUseCase
 import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.model.ui.station.StationDetails
 import com.ivzb.irish_rail.ui.Empty
+import com.ivzb.irish_rail.ui.NoConnection
 import com.ivzb.irish_rail.util.map
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class StationDetailsViewModel @Inject constructor(
         stationDetails = fetchStationDetailsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it?.successOr(listOf(Empty)) ?: listOf(Empty)
+            it?.successOr(listOf(NoConnection)) ?: listOf(Empty)
         }
     }
 

@@ -9,6 +9,7 @@ import com.ivzb.irish_rail.domain.successOr
 import com.ivzb.irish_rail.domain.trains.FetchTrainMovementsUseCase
 import com.ivzb.irish_rail.model.ui.train.TrainMovement
 import com.ivzb.irish_rail.ui.Empty
+import com.ivzb.irish_rail.ui.NoConnection
 import com.ivzb.irish_rail.util.map
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class TrainMovementsViewModel @Inject constructor(
         trains = fetchTrainsResult.map {
             // stop the loading indicator, whatever the result is
             loading.postValue(false)
-            it?.successOr(listOf(Empty)) ?: listOf(Empty)
+            it?.successOr(listOf(NoConnection)) ?: listOf(Empty)
         }
     }
 

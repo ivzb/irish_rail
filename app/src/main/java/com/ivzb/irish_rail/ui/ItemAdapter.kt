@@ -134,3 +134,27 @@ class EmptyViewBinder : ItemViewBinder<Empty, EmptyViewHolder>(
 
     override fun areContentsTheSame(oldItem: Empty, newItem: Empty) = true
 }
+
+// Shown if there is no connection
+object NoConnection
+
+class NoConnectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+class NoConnectionViewBinder : ItemViewBinder<NoConnection, NoConnectionViewHolder>(
+    NoConnection::class.java
+) {
+
+    override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return NoConnectionViewHolder(
+            LayoutInflater.from(parent.context).inflate(getItemType(), parent, false)
+        )
+    }
+
+    override fun bindViewHolder(model: NoConnection, viewHolder: NoConnectionViewHolder) {}
+
+    override fun getItemType() = R.layout.item_no_connection
+
+    override fun areItemsTheSame(oldItem: NoConnection, newItem: NoConnection) = true
+
+    override fun areContentsTheSame(oldItem: NoConnection, newItem: NoConnection) = true
+}

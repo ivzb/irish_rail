@@ -104,9 +104,11 @@ class TrainMovementsFragment : DaggerFragment() {
     private fun createAdapter(): ItemAdapter {
         val trainsViewBinder = TrainMovementsViewBinder(this, trainsViewModel)
         val emptyViewBinder = EmptyViewBinder()
+        val noConnectionViewBinder = NoConnectionViewBinder()
         val viewBinders = HashMap<ItemClass, ItemBinder>().apply {
             put(trainsViewBinder.modelClass, trainsViewBinder as ItemBinder)
             put(emptyViewBinder.modelClass, emptyViewBinder as ItemBinder)
+            put(noConnectionViewBinder.modelClass, noConnectionViewBinder as ItemBinder)
         }
         val queryMatcher = TrainMovementQueryMatcher()
 
