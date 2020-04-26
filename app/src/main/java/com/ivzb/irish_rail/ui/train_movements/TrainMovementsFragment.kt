@@ -16,6 +16,7 @@ import com.ivzb.irish_rail.ui.train_movements.TrainMovementsFragmentDirections.C
 import com.ivzb.irish_rail.util.capitalizeWords
 import com.ivzb.irish_rail.util.createSearchMenu
 import com.ivzb.irish_rail.util.provideViewModel
+import com.ivzb.irish_rail.util.updateTitle
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class TrainMovementsFragment : DaggerFragment() {
 
     private lateinit var trainsViewModel: TrainMovementsViewModel
     private lateinit var binding: FragmentTrainMovementsBinding
+    private lateinit var title: String
 
     private var adapter: ItemAdapter? = null
     private var searchItem: MenuItem? = null
@@ -63,7 +65,8 @@ class TrainMovementsFragment : DaggerFragment() {
             trainsViewModel.fetchTrains(trainId)
 
             val formattedDirection = direction.toLowerCase().removePrefix("to ").capitalizeWords()
-            requireActivity().title = "Train ${trainId.trim()} to $formattedDirection"
+            title = "Train ${trainId.trim()} to $formattedDirection"
+            updateTitle(title)
         }
 
         return binding.root
@@ -75,6 +78,7 @@ class TrainMovementsFragment : DaggerFragment() {
         createSearchMenu(menu, menuInflater, object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
                 trainsViewModel.search(query)
+                updateTitle(title, query)
                 return true
             }
 

@@ -15,6 +15,7 @@ import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.station_details.StationDetailsFragmentDirections.Companion.toTrainMovements
 import com.ivzb.irish_rail.util.createSearchMenu
 import com.ivzb.irish_rail.util.provideViewModel
+import com.ivzb.irish_rail.util.updateTitle
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class StationDetailsFragment : DaggerFragment() {
 
     private lateinit var stationDetailsViewModel: StationDetailsViewModel
     private lateinit var binding: FragmentStationDetailsBinding
+    private lateinit var title: String
 
     private var adapter: ItemAdapter? = null
     private var searchItem: MenuItem? = null
@@ -61,7 +63,8 @@ class StationDetailsFragment : DaggerFragment() {
             binding.stationCode = stationCode
             stationDetailsViewModel.fetchStationDetails(stationCode)
 
-            requireActivity().title = "Station $stationName ($stationCode)"
+            title = "Station $stationName ($stationCode)"
+            updateTitle(title)
         }
 
         return binding.root
@@ -73,6 +76,7 @@ class StationDetailsFragment : DaggerFragment() {
         createSearchMenu(menu, menuInflater, object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
                 stationDetailsViewModel.search(query)
+                updateTitle(title, query)
                 return true
             }
 

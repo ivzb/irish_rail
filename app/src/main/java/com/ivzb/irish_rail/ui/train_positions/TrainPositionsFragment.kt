@@ -3,6 +3,7 @@ package com.ivzb.irish_rail.ui.train_positions
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.ivzb.irish_rail.ui.*
 import com.ivzb.irish_rail.ui.train_positions.TrainPositionsFragmentDirections.Companion.toTrainMovements
 import com.ivzb.irish_rail.util.createSearchMenu
 import com.ivzb.irish_rail.util.provideViewModel
+import com.ivzb.irish_rail.util.updateTitle
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -56,7 +58,7 @@ class TrainPositionsFragment : DaggerFragment() {
         })
 
         setHasOptionsMenu(true)
-        requireActivity().title = getString(R.string.title_trains)
+        updateTitle(R.string.title_trains)
 
         return binding.root
     }
@@ -67,6 +69,7 @@ class TrainPositionsFragment : DaggerFragment() {
         createSearchMenu(menu, menuInflater, object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
                 trainsViewModel.search(query)
+                updateTitle(R.string.title_trains, query)
                 return true
             }
 

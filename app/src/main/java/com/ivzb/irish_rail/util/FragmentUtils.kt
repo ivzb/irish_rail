@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
+import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -42,6 +43,14 @@ fun Fragment.createSearchMenu(
             requestFocus()
         }
     }
+}
+
+fun Fragment.updateTitle(title: String, query: String? = null) {
+    requireActivity().title = if (query?.isEmpty() ?: false) title else "$title ($query)"
+}
+
+fun Fragment.updateTitle(@StringRes title: Int, query: String? = null) {
+    updateTitle(getString(title), query)
 }
 
 inline fun <reified VM : ViewModel> FragmentActivity.provideViewModel(
