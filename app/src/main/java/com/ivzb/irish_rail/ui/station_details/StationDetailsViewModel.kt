@@ -17,8 +17,8 @@ class StationDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val stationDetails: LiveData<List<Any>>
-    val loading: MutableLiveData<Boolean> = MutableLiveData()
-    val stationDetailsClick: MutableLiveData<Event<StationDetails>> = MutableLiveData()
+    val loading= MutableLiveData<Boolean>()
+    val stationDetailsClick= MutableLiveData<Event<StationDetails>>()
     val searchQuery = MutableLiveData<String>()
 
     private val fetchStationDetailsResult = MutableLiveData<Result<List<StationDetails>?>>()

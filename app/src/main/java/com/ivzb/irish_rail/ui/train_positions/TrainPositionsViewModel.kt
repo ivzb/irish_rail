@@ -15,8 +15,8 @@ class TrainPositionsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val trains: LiveData<List<Any>>
-    val loading: MutableLiveData<Boolean> = MutableLiveData()
-    val trainClick: MutableLiveData<Event<TrainPosition>> = MutableLiveData()
+    val loading = MutableLiveData<Boolean>()
+    val trainClick = MutableLiveData<Event<TrainPosition>>()
     val searchQuery = MutableLiveData<String>()
 
     private val fetchTrainsResult = MutableLiveData<Result<List<TrainPosition>?>>()

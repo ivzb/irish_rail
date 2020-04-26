@@ -46,13 +46,13 @@ class TrainPositionsFragment : DaggerFragment() {
             showTrains(binding.rvTrains, it)
         })
 
-        trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver { trainPosition ->
-            navigateToTrainMovements(trainPosition)
+        trainsViewModel.trainClick.observe(viewLifecycleOwner, EventObserver {
+            navigateToTrainMovements(it)
             closeSearch()
         })
 
-        trainsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
-            filterTrains(query)
+        trainsViewModel.searchQuery.observe(viewLifecycleOwner, Observer {
+            filterTrains(it)
         })
 
         setHasOptionsMenu(true)

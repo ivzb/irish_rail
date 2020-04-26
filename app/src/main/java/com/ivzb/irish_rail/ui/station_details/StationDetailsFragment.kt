@@ -46,15 +46,13 @@ class StationDetailsFragment : DaggerFragment() {
             showStationDetails(binding.rvStationDetails, it)
         })
 
-        stationDetailsViewModel.stationDetailsClick.observe(
-            viewLifecycleOwner,
-            EventObserver { stationDetails ->
-                navigateToTrainMovements(stationDetails)
-                closeSearch()
-            })
+        stationDetailsViewModel.stationDetailsClick.observe(viewLifecycleOwner, EventObserver {
+            navigateToTrainMovements(it)
+            closeSearch()
+        })
 
-        stationDetailsViewModel.searchQuery.observe(viewLifecycleOwner, Observer { query ->
-            filterStationDetails(query)
+        stationDetailsViewModel.searchQuery.observe(viewLifecycleOwner, Observer {
+            filterStationDetails(it)
         })
 
         setHasOptionsMenu(true)
