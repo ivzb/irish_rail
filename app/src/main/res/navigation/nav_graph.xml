@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/to_train_movements"
-            app:destination="@id/navigation_train_movements" />
+            app:destination="@id/navigation_train_movements"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
     </fragment>
 
     <fragment
@@ -32,7 +36,11 @@
 
         <action
             android:id="@+id/to_station_details"
-            app:destination="@id/navigation_station_details" />
+            app:destination="@id/navigation_station_details"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
     </fragment>
 
     <fragment
@@ -43,7 +51,11 @@
 
         <action
             android:id="@+id/to_station_details"
-            app:destination="@id/navigation_station_details" />
+            app:destination="@id/navigation_station_details"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
     </fragment>
 
     <fragment
@@ -62,6 +74,10 @@
 
         <action
             android:id="@+id/to_train_movements"
-            app:destination="@id/navigation_train_movements" />
+            app:destination="@id/navigation_train_movements"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
     </fragment>
 </navigation>
