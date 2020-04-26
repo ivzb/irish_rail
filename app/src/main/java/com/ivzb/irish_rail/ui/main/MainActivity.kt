@@ -28,6 +28,15 @@ class MainActivity : DaggerAppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemReselectedListener {
+            val reselected = it.itemId == navController.currentDestination?.id
+
+            if (!reselected) {
+                NavigationUI.onNavDestinationSelected(it, navController)
+            }
+
+            // Do nothing to ignore the reselection
+        }
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
     }
